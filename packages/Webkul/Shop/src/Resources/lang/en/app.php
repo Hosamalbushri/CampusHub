@@ -1,0 +1,159 @@
+<?php
+
+return [
+    'meta' => [
+        'title' => 'Student portal — Events',
+    ],
+
+    'home' => [
+        'seo' => [
+            'meta-title'       => 'Student portal',
+            'meta-description' => 'Browse events and updates for students.',
+            'meta-keywords'    => 'students, events, portal',
+        ],
+        'index' => [
+            'image-carousel'     => 'Featured images',
+            'events-carousel'    => 'Featured events',
+            'categories-carousel' => 'Event categories',
+            'footer-links'       => 'Homepage link columns',
+            'services-strip'     => 'Services and features',
+        ],
+        'hero' => [
+            'heading'    => 'Welcome to the student portal',
+            'subheading' => 'Discover events and stay connected with what is happening on campus.',
+            'cta'        => 'Browse events',
+        ],
+        'event-carousel' => [
+            'title'    => 'Latest events',
+            'empty'    => 'No published events yet.',
+            'view-all' => 'View all events',
+        ],
+        'category-carousel' => [
+            'title'    => 'Browse by category',
+            'empty'    => 'No event categories yet.',
+            'view-all' => 'All events',
+        ],
+        'carousel' => [
+            'slide-alt' => 'Carousel image :n',
+        ],
+    ],
+
+    'layout' => [
+        'brand' => 'Student portal',
+        'nav' => [
+            'home' => 'Home',
+            'events' => 'Events',
+            'student-login' => 'Student sign-in',
+            'student-logout' => 'Sign out',
+            'student-menu' => 'Student account menu',
+            'student-registration' => 'Registration no.',
+        ],
+        'footer' => 'Published events for students.',
+        'services-placeholder' => '',
+    ],
+
+    'partials' => [
+        'pagination' => [
+            'pagination-showing' => 'Showing :firstItem to :lastItem of :total results',
+            'simple' => 'More pages available',
+            'page-nav' => 'Pagination',
+            'prev-page' => 'Previous page',
+            'next-page' => 'Next page',
+            'prev-symbol' => '‹',
+            'next-symbol' => '›',
+        ],
+    ],
+
+    'components' => [
+        'layouts' => [
+            'skip-to-content' => 'Skip to main content',
+            'header' => [
+                'desktop' => [
+                    'bottom' => [
+                        'logo-alt' => 'Home',
+                        'nav-label' => 'Main navigation',
+                        'search' => 'Search events',
+                        'search-text' => 'Search events…',
+                    ],
+                ],
+                'mobile' => [
+                    'logo-alt' => 'Home',
+                    'menu' => 'Open menu',
+                    'search' => 'Search events',
+                    'search-text' => 'Search events…',
+                ],
+            ],
+            'footer' => [
+                'footer-content' => 'Footer links',
+                'footer-text' => '© :current_year — Student portal. All rights reserved.',
+                'link-home' => 'Home',
+                'link-events' => 'Events',
+                'link-student-login' => 'Student sign-in',
+                'link-student-logout' => 'Sign out',
+            ],
+            'flash-group' => [
+                'close' => 'Dismiss notification',
+            ],
+            'services' => [
+                'calendar-title' => 'Event calendar',
+                'calendar-desc' => 'See what is on and plan ahead.',
+                'updates-title' => 'Stay informed',
+                'updates-desc' => 'Descriptions and details in one place.',
+                'campus-title' => 'Campus & venues',
+                'campus-desc' => 'Know where activities take place.',
+            ],
+        ],
+    ],
+
+    'events' => [
+        'index' => [
+            'title' => 'Events',
+            'heading' => 'Events for students',
+            'subheading' => 'Browse published events you can attend or follow.',
+            'empty' => 'No published events yet. Please check again later.',
+        ],
+        'subscribe' => [
+            'success' => 'You are now registered for this event.',
+            'already' => 'You are already registered for this event.',
+            'no-seats' => 'There are no seats left for this event.',
+            'not-available' => 'This event is not open for registration right now.',
+            'event-unavailable' => 'This event is not available.',
+            'event-not-found' => 'Event not found.',
+            'login-to-continue' => 'Sign in with your student account to complete registration.',
+        ],
+        'card' => [
+            'no-image' => 'No image',
+            'view' => 'View details',
+            'details' => 'View details',
+            'subscribe' => 'Subscribe',
+            'subscribe-unavailable' => 'Unavailable',
+            'subscribe-registered' => 'Registered',
+            'date-format' => 'M j, Y',
+            'modal-title' => 'Confirm subscription',
+            'modal-body-before' => 'You are about to continue for ',
+            'modal-body-after' => '. You will be taken to the event page to complete the next steps.',
+            'modal-confirm' => 'Confirm',
+            'modal-confirm-login' => 'Sign in to continue',
+            'modal-cancel' => 'Cancel',
+            'modal-close' => 'Close dialog',
+        ],
+        'seats' => [
+            'unlimited' => 'Open capacity',
+            'sold-out' => 'Fully booked',
+            'remaining' => ':count seats available',
+            'ended' => 'Registration closed',
+            'unavailable' => 'Not available',
+            'open-registrations' => 'Open for registration',
+        ],
+        'show' => [
+            'back' => 'All events',
+            'details' => 'Details',
+            'related' => 'Related events',
+            'suggestions-title' => 'You may also like',
+            'suggestions-subtitle' => 'Similar events you might want to explore next.',
+            'seats-heading' => 'Availability',
+            'breadcrumb-nav' => 'Breadcrumb navigation',
+            'breadcrumb-home' => 'Home',
+        ],
+    ],
+];
