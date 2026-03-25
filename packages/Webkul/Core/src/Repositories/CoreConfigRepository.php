@@ -138,6 +138,9 @@ class CoreConfigRepository extends Repository
                             $val = request()->file($fieldNameWithKey)->store('configuration');
                         }
 
+                        // core_config.value is NOT NULL, so normalize null form values.
+                        $val = $val === null ? '' : $val;
+
                         if ($coreConfigValues->isNotEmpty()) {
                             foreach ($coreConfigValues as $coreConfig) {
                                 if (request()->hasFile($fieldNameWithKey)) {
@@ -154,6 +157,8 @@ class CoreConfigRepository extends Repository
                     if (request()->hasFile($fieldName)) {
                         $value = request()->file($fieldName)->store('configuration');
                     }
+
+                    $value = $value === null ? '' : $value;
 
                     $preparedData[] = [
                         'code' => $fieldName,

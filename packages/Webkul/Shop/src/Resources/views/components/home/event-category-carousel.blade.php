@@ -22,10 +22,22 @@
 
             <a
                 href="{{ route('shop.events.index') }}"
-                class="text-sm font-semibold text-[color:var(--shop-accent)] hover:text-[color:var(--shop-accent-hover)]"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--shop-accent)] hover:text-[color:var(--shop-accent-hover)]"
             >
                 {{ __('shop::app.home.category-carousel.view-all') }}
-                <span class="ms-1" aria-hidden="true">→</span>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="h-4 w-4 shrink-0 rtl:rotate-180"
+                    aria-hidden="true"
+                >
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
             </a>
         </div>
 

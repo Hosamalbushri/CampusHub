@@ -34,7 +34,7 @@ return [
 
     /**
      * Home page sections (same idea as Bagisto theme customizations: type + options, ordered).
-     * Types: image_carousel, static_content, event_carousel, category_carousel (event categories), footer_links, services_content. product_carousel is ignored on the storefront.
+     * Types: image_carousel, static_content, event_carousel, category_carousel (event categories), footer_links, services_content, immersive_hero. product_carousel is ignored on the storefront.
      */
     'home_customizations' => [
         [

@@ -19,3 +19,8 @@ Route::post('events/{id}/subscribe', [EventSubscriptionController::class, 'store
     ->middleware(['auth:student', 'throttle:30,1'])
     ->whereNumber('id')
     ->name('shop.events.subscribe');
+
+Route::post('events/{id}/unsubscribe', [EventSubscriptionController::class, 'destroy'])
+    ->middleware(['auth:student', 'throttle:30,1'])
+    ->whereNumber('id')
+    ->name('shop.events.unsubscribe');

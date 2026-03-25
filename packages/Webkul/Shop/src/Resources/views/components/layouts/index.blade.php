@@ -40,7 +40,7 @@
             content="{{ csrf_token() }}"
         >
 
-        @if ($favicon = core()->getConfigData('general.design.shop.favicon'))
+        @if ($favicon = core()->getConfigData('general.store.shop.favicon') ?: core()->getConfigData('general.design.shop.favicon'))
             <link
                 type="image/x-icon"
                 href="{{ \Illuminate\Support\Facades\Storage::url($favicon) }}"
@@ -80,8 +80,12 @@
         }}
 
         @php
-            $shopPrimary = core()->getConfigData('general.design.shop.primary_color') ?: '#0284c7';
-            $shopAccent = core()->getConfigData('general.design.shop.accent_color') ?: '#0369a1';
+            $shopPrimary = core()->getConfigData('general.store.shop.primary_color')
+                ?: core()->getConfigData('general.design.shop.primary_color')
+                ?: '#0284c7';
+            $shopAccent = core()->getConfigData('general.store.shop.accent_color')
+                ?: core()->getConfigData('general.design.shop.accent_color')
+                ?: '#0369a1';
             if (! preg_match('/^#[0-9A-Fa-f]{6}$/', $shopPrimary)) {
                 $shopPrimary = '#0284c7';
             }

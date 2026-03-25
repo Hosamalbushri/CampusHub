@@ -1,5 +1,6 @@
 @php
-    $siteLogo = core()->getConfigData('general.design.shop.logo_image');
+    $siteLogo = core()->getConfigData('general.store.shop.logo_image')
+        ?: core()->getConfigData('general.design.shop.logo_image');
     $adminLogo = core()->getConfigData('general.design.admin_logo.logo_image');
 @endphp
 @if ($siteLogo)

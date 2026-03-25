@@ -24,4 +24,10 @@ class ThemeCustomization
      * Portal-specific: horizontal strip of published events (replaces product carousel data source).
      */
     public const EVENT_CAROUSEL = 'event_carousel';
+
+    /**
+     * Full-viewport hero (dark gradient, optional particles/orbs, typing line, CTAs, stats, stacked cards).
+     * Options are fully editable from the admin theme customization screen.
+     */
+    public const IMMERSIVE_HERO = 'immersive_hero';
 }

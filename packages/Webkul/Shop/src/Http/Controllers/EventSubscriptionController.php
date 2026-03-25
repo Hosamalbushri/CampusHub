@@ -38,4 +38,22 @@ class EventSubscriptionController extends Controller
             'subscribed_event_ids'   => $this->studentSubscribedEventIds(),
         ]);
     }
+
+    public function destroy(int $id): JsonResponse
+    {
+        $student = auth('student')->user();
+
+        try {
+            $this->eventSubscriptionService->unsubscribe($id, (int) $student->id);
+        } catch (SubscriptionFailedException $e) {
+            return new JsonResponse([
+                'message' => $e->getMessage(),
+            ], 422);
+        }
+
+        return new JsonResponse([
+            'message'              => __('shop::app.events.unsubscribe.success'),
+            'subscribed_event_ids' => $this->studentSubscribedEventIds(),
+        ]);
+    }
 }

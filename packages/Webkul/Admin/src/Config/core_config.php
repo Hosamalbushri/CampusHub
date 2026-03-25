@@ -56,33 +56,124 @@ return [
             ],
         ],
     ], [
-        'key' => 'general.design.shop',
-        'name' => 'admin::app.configuration.index.general.design.shop-logo.title',
-        'info' => 'admin::app.configuration.index.general.design.shop-logo.title-info',
-        'sort' => 2,
+        'key' => 'general.store',
+        'name' => 'admin::app.configuration.index.general.store.title',
+        'info' => 'admin::app.configuration.index.general.store.info',
+        'icon' => 'icon-configuration',
+        'sort' => 3,
+    ], [
+        'key' => 'general.store.shop',
+        'name' => 'admin::app.configuration.index.general.store.shop-logo.title',
+        'info' => 'admin::app.configuration.index.general.store.shop-logo.title-info',
+        'sort' => 1,
         'fields' => [
             [
                 'name' => 'logo_image',
-                'title' => 'admin::app.configuration.index.general.design.shop-logo.logo-image',
+                'title' => 'admin::app.configuration.index.general.store.shop-logo.logo-image',
                 'type' => 'image',
                 'channel_based' => false,
                 'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
-            ],             [
+            ], [
                 'name' => 'favicon',
-                'title' => 'admin::app.configuration.index.general.design.shop-logo.favicon',
+                'title' => 'admin::app.configuration.index.general.store.shop-logo.favicon',
                 'type' => 'image',
                 'channel_based' => false,
                 'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg,ico',
             ], [
                 'name' => 'primary_color',
-                'title' => 'admin::app.configuration.index.general.design.shop-logo.primary-color',
+                'title' => 'admin::app.configuration.index.general.store.shop-logo.primary-color',
                 'type' => 'color',
                 'default' => '#0284c7',
             ], [
                 'name' => 'accent_color',
-                'title' => 'admin::app.configuration.index.general.design.shop-logo.accent-color',
+                'title' => 'admin::app.configuration.index.general.store.shop-logo.accent-color',
                 'type' => 'color',
                 'default' => '#0369a1',
+            ], [
+                'name' => 'header_middle_logo',
+                'title' => 'admin::app.configuration.index.general.store.shop-logo.header-middle-logo',
+                'type' => 'image',
+                'channel_based' => false,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
+            ],
+        ],
+    ], [
+        'key' => 'general.store.events_page',
+        'name' => 'admin::app.configuration.index.general.store.events-page.title',
+        'info' => 'admin::app.configuration.index.general.store.events-page.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'heading',
+                'title' => 'admin::app.configuration.index.general.store.events-page.heading',
+                'type' => 'text',
+                'default' => 'Events for students',
+                'validation' => 'max:255',
+            ], [
+                'name' => 'description',
+                'title' => 'admin::app.configuration.index.general.store.events-page.description',
+                'type' => 'textarea',
+                'default' => 'Browse published events you can attend or follow.',
+            ],
+        ],
+    ], [
+        'key' => 'general.store.navigation',
+        'name' => 'admin::app.configuration.index.general.store.navigation.title',
+        'info' => 'admin::app.configuration.index.general.store.navigation.title-info',
+        'sort' => 3,
+        'fields' => [
+            [
+                'name' => 'show_home',
+                'title' => 'admin::app.configuration.index.general.store.navigation.show-home',
+                'type' => 'boolean',
+                'default' => true,
+            ], [
+                'name' => 'home_label',
+                'title' => 'admin::app.configuration.index.general.store.navigation.home-label',
+                'type' => 'text',
+                'default' => 'Home',
+                'validation' => 'max:100',
+            ], [
+                'name' => 'show_events',
+                'title' => 'admin::app.configuration.index.general.store.navigation.show-events',
+                'type' => 'boolean',
+                'default' => true,
+            ], [
+                'name' => 'events_label',
+                'title' => 'admin::app.configuration.index.general.store.navigation.events-label',
+                'type' => 'text',
+                'default' => 'Events',
+                'validation' => 'max:100',
+            ], [
+                'name' => 'custom_1_enabled',
+                'title' => 'admin::app.configuration.index.general.store.navigation.custom-1-enabled',
+                'type' => 'boolean',
+                'default' => false,
+            ], [
+                'name' => 'custom_1_label',
+                'title' => 'admin::app.configuration.index.general.store.navigation.custom-1-label',
+                'type' => 'text',
+                'validation' => 'max:100',
+            ], [
+                'name' => 'custom_1_url',
+                'title' => 'admin::app.configuration.index.general.store.navigation.custom-1-url',
+                'type' => 'text',
+                'validation' => 'max:500',
+            ], [
+                'name' => 'custom_2_enabled',
+                'title' => 'admin::app.configuration.index.general.store.navigation.custom-2-enabled',
+                'type' => 'boolean',
+                'default' => false,
+            ], [
+                'name' => 'custom_2_label',
+                'title' => 'admin::app.configuration.index.general.store.navigation.custom-2-label',
+                'type' => 'text',
+                'validation' => 'max:100',
+            ], [
+                'name' => 'custom_2_url',
+                'title' => 'admin::app.configuration.index.general.store.navigation.custom-2-url',
+                'type' => 'text',
+                'validation' => 'max:500',
             ],
         ],
     ], [
@@ -90,7 +181,7 @@ return [
         'name' => 'admin::app.configuration.index.general.settings.title',
         'info' => 'admin::app.configuration.index.general.settings.info',
         'icon' => 'icon-configuration',
-        'sort' => 3,
+        'sort' => 4,
     ], [
         'key' => 'general.settings.footer',
         'name' => 'admin::app.configuration.index.general.settings.footer.title',
@@ -229,7 +320,7 @@ return [
         'name' => 'admin::app.configuration.index.magic-ai.title',
         'info' => 'admin::app.configuration.index.magic-ai.info',
         'icon' => 'icon-setting',
-        'sort' => 4,
+        'sort' => 5,
     ], [
         'key' => 'general.magic_ai.settings',
         'name' => 'admin::app.configuration.index.magic-ai.settings.title',

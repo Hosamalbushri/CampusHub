@@ -66,8 +66,10 @@
 
     @php
         $menuBrand = core()->getConfigData('general.settings.menu_color.brand_color') ?? '#0E90D9';
-        $shopPrimary = core()->getConfigData('general.design.shop.primary_color');
-        $shopAccent = core()->getConfigData('general.design.shop.accent_color');
+        $shopPrimary = core()->getConfigData('general.store.shop.primary_color')
+            ?: core()->getConfigData('general.design.shop.primary_color');
+        $shopAccent = core()->getConfigData('general.store.shop.accent_color')
+            ?: core()->getConfigData('general.design.shop.accent_color');
         $primaryOk = is_string($shopPrimary) && preg_match('/^#[0-9A-Fa-f]{6}$/', $shopPrimary);
         $accentOk = is_string($shopAccent) && preg_match('/^#[0-9A-Fa-f]{6}$/', $shopAccent);
         $brandColor = $primaryOk ? $shopPrimary : $menuBrand;

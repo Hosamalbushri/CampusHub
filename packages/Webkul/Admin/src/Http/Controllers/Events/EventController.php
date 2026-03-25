@@ -3,7 +3,6 @@
 namespace Webkul\Admin\Http\Controllers\Events;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Event\EventDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -35,19 +34,13 @@ class EventController extends Controller
     {
         $this->validate(request(), [
             'event_date' => 'required|date',
-            'event_end_date' => [
-                'nullable',
-                'date',
-                'after_or_equal:event_date',
-                Rule::requiredIf(fn () => request()->boolean('availability_use_end_date')),
-            ],
+            'event_end_date' => 'required|date|after_or_equal:event_date',
             'organizer' => 'required|string|max:255',
             'title' => 'required|string',
             'category_ids' => 'required|array|min:1',
             'category_ids.*' => 'integer|exists:event_categories,id',
             'available_seats' => 'nullable|integer|min:0',
             'availability_use_seats' => 'nullable|boolean',
-            'availability_use_end_date' => 'nullable|boolean',
             'status' => 'nullable|boolean',
             'image.*' => 'nullable|file|image',
             'description' => 'nullable|string',
@@ -100,19 +93,13 @@ class EventController extends Controller
     {
         $this->validate(request(), [
             'event_date' => 'required|date',
-            'event_end_date' => [
-                'nullable',
-                'date',
-                'after_or_equal:event_date',
-                Rule::requiredIf(fn () => request()->boolean('availability_use_end_date')),
-            ],
+            'event_end_date' => 'required|date|after_or_equal:event_date',
             'organizer' => 'required|string|max:255',
             'title' => 'required|string',
             'category_ids' => 'required|array|min:1',
             'category_ids.*' => 'integer|exists:event_categories,id',
             'available_seats' => 'nullable|integer|min:0',
             'availability_use_seats' => 'nullable|boolean',
-            'availability_use_end_date' => 'nullable|boolean',
             'status' => 'nullable|boolean',
             'image.*' => 'nullable|file|image',
             'description' => 'nullable|string',
@@ -301,7 +288,8 @@ class EventController extends Controller
     {
         $data['status'] = request()->boolean('status');
         $data['availability_use_seats'] = request()->boolean('availability_use_seats');
-        $data['availability_use_end_date'] = request()->boolean('availability_use_end_date');
+        // End-date availability is always enabled; end date itself is mandatory.
+        $data['availability_use_end_date'] = true;
 
         $seats = request()->input('available_seats');
         if ($seats === '' || $seats === null) {
@@ -315,10 +303,6 @@ class EventController extends Controller
             $data['event_end_date'] = null;
         } else {
             $data['event_end_date'] = $end;
-        }
-
-        if (! $data['availability_use_end_date']) {
-            $data['event_end_date'] = null;
         }
 
         return $data;

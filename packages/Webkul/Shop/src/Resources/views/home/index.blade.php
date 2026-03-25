@@ -27,6 +27,14 @@
 
                 @break
 
+            @case (ThemeCustomization::IMMERSIVE_HERO)
+                <x-shop::home.immersive-hero
+                    :options="$data"
+                    :aria-label="__('shop::app.home.index.immersive-hero')"
+                />
+
+                @break
+
             @case (ThemeCustomization::STATIC_CONTENT)
                 @if (! empty($data['css']))
                     @push('styles')

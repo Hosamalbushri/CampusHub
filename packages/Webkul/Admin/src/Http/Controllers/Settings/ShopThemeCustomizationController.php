@@ -26,6 +26,7 @@ class ShopThemeCustomizationController extends Controller
         'category_carousel',
         'footer_links',
         'services_content',
+        'immersive_hero',
     ];
 
     /**
@@ -36,6 +37,139 @@ class ShopThemeCustomizationController extends Controller
     private static function typesForUpdate(): array
     {
         return array_merge(self::TYPES_CREATABLE, ['product_carousel']);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    protected function normalizeImmersiveHeroOptions(Request $request): array
+    {
+        $o = $request->input('options', []);
+        $o = is_array($o) ? $o : [];
+
+        $wordsText = (string) data_get($o, 'typing.words_text', '');
+        $words = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $wordsText) ?: [])));
+
+        $cards = [];
+        foreach ([0, 1, 2] as $i) {
+            $cards[] = [
+                'icon'       => $this->sanitizeImmersiveFaClass((string) data_get($o, "cards.$i.icon", '')),
+                'date_line'  => mb_substr(trim((string) data_get($o, "cards.$i.date_line", '')), 0, 191),
+                'title'      => mb_substr(trim((string) data_get($o, "cards.$i.title", '')), 0, 191),
+                'attendees'  => mb_substr(trim((string) data_get($o, "cards.$i.attendees", '')), 0, 191),
+            ];
+        }
+
+        return [
+            'effects' => [
+                'particles'      => $request->boolean('options.effects.particles'),
+                'orbs'           => $request->boolean('options.effects.orbs'),
+                'grid'           => $request->boolean('options.effects.grid'),
+                'custom_cursor'  => $request->boolean('options.effects.custom_cursor'),
+                'visual_cards'   => $request->boolean('options.effects.visual_cards'),
+                'scroll_hint'    => $request->boolean('options.effects.scroll_hint'),
+                'font_awesome'   => $request->boolean('options.effects.font_awesome'),
+            ],
+            'particles_count' => max(20, min(200, (int) data_get($o, 'particles_count', 80))),
+            'colors'          => [
+                'bg_start'   => $this->sanitizeImmersiveColor((string) data_get($o, 'colors.bg_start', '#0a0a2a'), '#0a0a2a', true),
+                'bg_mid'     => $this->sanitizeImmersiveColor((string) data_get($o, 'colors.bg_mid', '#1a1a3a'), '#1a1a3a', true),
+                'bg_end'     => $this->sanitizeImmersiveColor((string) data_get($o, 'colors.bg_end', '#0f0f2a'), '#0f0f2a', true),
+                'accent'     => $this->sanitizeImmersiveColor((string) data_get($o, 'colors.accent', '#8b5cf6'), '#8b5cf6', true),
+                'accent_2'   => $this->sanitizeImmersiveColor((string) data_get($o, 'colors.accent_2', '#6366f1'), '#6366f1', true),
+                'text'       => $this->sanitizeImmersiveColor((string) data_get($o, 'colors.text', '#ffffff'), '#ffffff', false),
+                'text_muted' => $this->sanitizeImmersiveColor((string) data_get($o, 'colors.text_muted', 'rgba(255,255,255,0.7)'), 'rgba(255,255,255,0.7)', false),
+                'orb_1'      => $this->sanitizeImmersiveColor((string) data_get($o, 'colors.orb_1', 'rgba(139, 92, 246, 0.8)'), 'rgba(139, 92, 246, 0.8)', false),
+                'orb_2'      => $this->sanitizeImmersiveColor((string) data_get($o, 'colors.orb_2', 'rgba(236, 72, 153, 0.6)'), 'rgba(236, 72, 153, 0.6)', false),
+                'orb_3'      => $this->sanitizeImmersiveColor((string) data_get($o, 'colors.orb_3', 'rgba(59, 130, 246, 0.7)'), 'rgba(59, 130, 246, 0.7)', false),
+            ],
+            'badge' => [
+                'enabled' => $request->boolean('options.badge.enabled'),
+                'icon'    => $this->sanitizeImmersiveFaClass((string) data_get($o, 'badge.icon', 'fas fa-calendar-star')),
+                'text'    => mb_substr(trim((string) data_get($o, 'badge.text', '')), 0, 255),
+            ],
+            'heading' => [
+                'line1'     => mb_substr(trim((string) data_get($o, 'heading.line1', '')), 0, 500),
+                'highlight' => mb_substr(trim((string) data_get($o, 'heading.highlight', '')), 0, 255),
+            ],
+            'typing' => [
+                'prefix' => mb_substr(trim((string) data_get($o, 'typing.prefix', '')), 0, 191),
+                'words'  => array_slice($words, 0, 30),
+            ],
+            'description' => mb_substr(trim((string) data_get($o, 'description', '')), 0, 2000),
+            'primary_cta' => [
+                'label' => mb_substr(trim((string) data_get($o, 'primary_cta.label', '')), 0, 191),
+                'url'   => $this->sanitizeImmersiveUrl((string) data_get($o, 'primary_cta.url', '')),
+                'icon'  => $this->sanitizeImmersiveFaClass((string) data_get($o, 'primary_cta.icon', 'fas fa-compass')),
+            ],
+            'secondary_cta' => [
+                'enabled' => $request->boolean('options.secondary_cta.enabled'),
+                'label'   => mb_substr(trim((string) data_get($o, 'secondary_cta.label', '')), 0, 191),
+                'url'     => $this->sanitizeImmersiveUrl((string) data_get($o, 'secondary_cta.url', '')),
+                'icon'    => $this->sanitizeImmersiveFaClass((string) data_get($o, 'secondary_cta.icon', 'fas fa-plus-circle')),
+            ],
+            'cards'       => $cards,
+            'scroll_hint' => [
+                'text' => mb_substr(trim((string) data_get($o, 'scroll_hint.text', '')), 0, 191),
+            ],
+        ];
+    }
+
+    protected function sanitizeImmersiveColor(string $value, string $fallback, bool $hexOnly): string
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return $fallback;
+        }
+        if (strlen($value) > 120) {
+            return $fallback;
+        }
+        if ($hexOnly) {
+            return preg_match('/^#[0-9A-Fa-f]{6}$/', $value) ? $value : $fallback;
+        }
+        if (preg_match('/^#[0-9A-Fa-f]{3,8}$/', $value)) {
+            return $value;
+        }
+        if (preg_match('/^rgba?\([^)]+\)$/i', $value)) {
+            return $value;
+        }
+
+        return $fallback;
+    }
+
+    protected function sanitizeImmersiveUrl(string $url): string
+    {
+        $url = trim($url);
+        if ($url === '') {
+            return '';
+        }
+        if (strlen($url) > 2048) {
+            return '';
+        }
+        if (str_starts_with($url, '/') || str_starts_with($url, '#') || str_starts_with($url, '?')) {
+            return $url;
+        }
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
+            return $url;
+        }
+
+        return '';
+    }
+
+    protected function sanitizeImmersiveFaClass(string $class): string
+    {
+        $class = trim(preg_replace('/\s+/', ' ', $class) ?? '');
+        if ($class === '') {
+            return '';
+        }
+        if (strlen($class) > 80) {
+            return '';
+        }
+        if (! preg_match('/^[a-z0-9\s\-]+$/i', $class)) {
+            return '';
+        }
+
+        return $class;
     }
 
     public function __construct(
@@ -203,6 +337,12 @@ class ShopThemeCustomizationController extends Controller
 
             case 'product_carousel':
                 $theme->options = [];
+                $theme->save();
+
+                break;
+
+            case 'immersive_hero':
+                $theme->options = $this->normalizeImmersiveHeroOptions($request);
                 $theme->save();
 
                 break;

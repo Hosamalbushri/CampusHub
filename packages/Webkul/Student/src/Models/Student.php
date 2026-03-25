@@ -24,6 +24,7 @@ class Student extends Authenticatable
         'registration_number',
         'major',
         'academic_level',
+        'profile_image',
     ];
 
     /**

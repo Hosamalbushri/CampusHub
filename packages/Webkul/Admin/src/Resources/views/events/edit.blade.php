@@ -281,30 +281,8 @@
                                 <x-admin::form.control-group.error control-name="available_seats" />
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group>
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.events.create.availability-use-end-date')
-                                </x-admin::form.control-group.label>
-
-                                <input type="hidden" name="availability_use_end_date" value="0" />
-
-                                <x-admin::form.control-group.control
-                                    type="switch"
-                                    name="availability_use_end_date"
-                                    value="1"
-                                    :checked="filter_var(old('availability_use_end_date', $event->availability_use_end_date ?? false), FILTER_VALIDATE_BOOLEAN)"
-                                    :label="trans('admin::app.events.create.availability-use-end-date')"
-                                />
-
-                                <p class="mb-2 text-xs text-gray-600 dark:text-gray-400">
-                                    @lang('admin::app.events.create.availability-use-end-date-hint')
-                                </p>
-
-                                <x-admin::form.control-group.error control-name="availability_use_end_date" />
-                            </x-admin::form.control-group>
-
                             <x-admin::form.control-group class="!mb-0">
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.events.create.event-end-date')
                                 </x-admin::form.control-group.label>
 
@@ -313,6 +291,7 @@
                                     id="event_end_date"
                                     name="event_end_date"
                                     value="{{ old('event_end_date') ?: ($event->event_end_date ? $event->event_end_date->format('Y-m-d') : '') }}"
+                                    rules="required"
                                     :label="trans('admin::app.events.create.event-end-date')"
                                 />
 

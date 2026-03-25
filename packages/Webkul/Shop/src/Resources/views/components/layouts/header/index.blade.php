@@ -1,6 +1,6 @@
 {!! view_render_event('shop.layout.header.before') !!}
 
-<header class="sticky top-0 z-10 bg-white shadow-sm max-lg:shadow-none">
+<header class="sticky top-0 z-50 bg-white shadow-sm max-lg:shadow-none">
     <div class="hidden lg:block">
         <x-shop::layouts.header.desktop />
     </div>

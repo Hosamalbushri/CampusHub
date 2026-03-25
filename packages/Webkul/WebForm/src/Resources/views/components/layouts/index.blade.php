@@ -45,7 +45,7 @@
         rel="stylesheet"
     />
 
-    @if ($favicon = core()->getConfigData('general.design.shop.favicon'))
+    @if ($favicon = core()->getConfigData('general.store.shop.favicon') ?: core()->getConfigData('general.design.shop.favicon'))
         <link
             type="image/x-icon"
             href="{{ Storage::url($favicon) }}"
