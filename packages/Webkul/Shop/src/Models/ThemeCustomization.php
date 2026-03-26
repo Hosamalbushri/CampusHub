@@ -30,4 +30,10 @@ class ThemeCustomization
      * Options are fully editable from the admin theme customization screen.
      */
     public const IMMERSIVE_HERO = 'immersive_hero';
+
+    /**
+     * Global storefront footer (all pages). One active row per theme_code recommended.
+     * Not rendered as a home section — loaded from the main layout footer.
+     */
+    public const PORTAL_FOOTER = 'portal_footer';
 }

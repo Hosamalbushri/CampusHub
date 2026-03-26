@@ -93,6 +93,10 @@
                 {{-- Intentionally not rendered: product catalog is out of scope for this portal. --}}
                 @break
 
+            @case (ThemeCustomization::PORTAL_FOOTER)
+                {{-- Global layout footer only; excluded from home loop via HomeController. --}}
+                @break
+
             @default
         @endswitch
     @endforeach

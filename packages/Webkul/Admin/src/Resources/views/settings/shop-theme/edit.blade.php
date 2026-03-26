@@ -101,6 +101,11 @@
                                     'opts' => $opts,
                                 ])
 
+                                @includeWhen($theme->type === 'portal_footer', 'admin::settings.shop-theme.edit.portal-footer', [
+                                    'theme' => $theme,
+                                    'opts' => $opts,
+                                ])
+
                                 @if ($theme->type === 'product_carousel')
                                     <div class="box-shadow rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-100">
                                         @lang('admin::app.settings.shop-theme.edit.product-carousel-legacy')
@@ -173,6 +178,7 @@
                                     <option value="footer_links">@lang('admin::app.settings.shop-theme.create.type.footer-links')</option>
                                     <option value="services_content">@lang('admin::app.settings.shop-theme.create.type.services-content')</option>
                                     <option value="immersive_hero">@lang('admin::app.settings.shop-theme.create.type.immersive-hero')</option>
+                                    <option value="portal_footer">@lang('admin::app.settings.shop-theme.create.type.portal-footer')</option>
                                     @if ($theme->type === 'product_carousel')
                                         <option value="product_carousel">@lang('admin::app.settings.shop-theme.create.type.product-carousel-legacy')</option>
                                     @endif

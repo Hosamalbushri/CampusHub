@@ -111,7 +111,7 @@
             }
         </style>
 
-        @stack('styles')
+        {{-- Styles stack must run after slot + footer: @push from page/footer renders later than <head>. --}}
 
         {!! view_render_event('shop.layout.head.after') !!}
     </head>
@@ -150,6 +150,8 @@
         @if ($hasFooter)
             <x-shop::layouts.footer />
         @endif
+
+        @stack('styles')
 
         {!! view_render_event('shop.layout.body.after') !!}
 

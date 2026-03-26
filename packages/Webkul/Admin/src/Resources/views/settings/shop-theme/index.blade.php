@@ -160,6 +160,7 @@
                             footer_links: "@lang('admin::app.settings.shop-theme.create.type.footer-links')",
                             services_content: "@lang('admin::app.settings.shop-theme.create.type.services-content')",
                             immersive_hero: "@lang('admin::app.settings.shop-theme.create.type.immersive-hero')",
+                            portal_footer: "@lang('admin::app.settings.shop-theme.create.type.portal-footer')",
                         },
 
                         isLoading: false,

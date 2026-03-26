@@ -29,6 +29,23 @@ class ShopThemeCustomizationRepository extends Repository
             ->get();
     }
 
+    /**
+     * Active global portal footer for layout (not a home section).
+     */
+    public function getActivePortalFooter(string $themeCode): ?ShopThemeCustomization
+    {
+        /** @var ShopThemeCustomization|null $row */
+        $row = $this->model
+            ->newQuery()
+            ->where('theme_code', $themeCode)
+            ->where('type', 'portal_footer')
+            ->where('status', true)
+            ->orderBy('id')
+            ->first();
+
+        return $row;
+    }
+
     public function sanitizeHtml(string $html): string
     {
         $html = preg_replace('#<(script|iframe|object|embed)[^>]*>.*?</\1>#is', '', $html) ?? '';

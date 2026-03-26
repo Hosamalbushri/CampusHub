@@ -61,6 +61,8 @@ class HomeController extends Controller
 
         return $this->shopThemeCustomizationRepository
             ->getActiveForStorefront($themeCode)
+            ->filter(fn (ShopThemeCustomization $row) => $row->type !== ThemeCustomization::PORTAL_FOOTER)
+            ->values()
             ->map(function (ShopThemeCustomization $row) {
                 $options = is_array($row->options) ? $row->options : [];
                 $obj = (object) [
@@ -101,6 +103,7 @@ class HomeController extends Controller
     {
         $rows = collect(config('shop.home_customizations', []))
             ->filter(fn (array $row) => (int) ($row['status'] ?? 1) === 1)
+            ->filter(fn (array $row) => ($row['type'] ?? '') !== ThemeCustomization::PORTAL_FOOTER)
             ->sortBy(fn (array $row, int $i) => $row['sort_order'] ?? $i)
             ->values();
 

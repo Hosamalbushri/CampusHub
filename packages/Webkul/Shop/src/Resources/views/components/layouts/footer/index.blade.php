@@ -1,8 +1,21 @@
 {!! view_render_event('shop.layout.footer.before') !!}
 
 @php
+    use Illuminate\Support\Facades\Schema;
+    use Webkul\Shop\Repositories\ShopThemeCustomizationRepository;
+
+    $portalFooter = null;
+    if (Schema::hasTable('shop_theme_customizations')) {
+        $portalFooter = app(ShopThemeCustomizationRepository::class)
+            ->getActivePortalFooter(config('shop.storefront_theme_code', 'default'));
+    }
+
     $footerSections = config('shop.footer_sections', []);
 @endphp
+
+@if ($portalFooter && is_array($portalFooter->options) && ($portalFooter->options['enabled'] ?? true))
+    <x-shop::layouts.footer.portal :options="$portalFooter->options" />
+@else
 
 <footer class="mt-9 bg-lightOrange max-sm:mt-10">
     <div class="flex justify-between gap-x-6 gap-y-8 p-[60px] max-1060:flex-col-reverse max-md:gap-5 max-md:p-8 max-sm:px-4 max-sm:py-5">
@@ -52,5 +65,7 @@
         {!! view_render_event('shop.layout.footer.footer_text.after') !!}
     </div>
 </footer>
+
+@endif
 
 {!! view_render_event('shop.layout.footer.after') !!}

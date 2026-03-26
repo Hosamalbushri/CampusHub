@@ -149,6 +149,12 @@ return [
                 'link-events' => 'Events',
                 'link-student-login' => 'Student sign-in',
                 'link-student-logout' => 'Sign out',
+                'portal' => [
+                    'social-profile' => 'Social profile',
+                    'bottom-nav' => 'Footer links',
+                    'back-top' => 'Back to top',
+                    'newsletter-demo' => 'Thanks — your email was accepted (demo: set a form action URL in admin to submit for real).',
+                ],
             ],
             'flash-group' => [
                 'close' => 'Dismiss notification',
