@@ -85,7 +85,13 @@ class EventController extends Controller
             $query->orderByDesc('id');
         }
 
-        $events = $query->paginate(12)->withQueryString();
+        $eventsPerPage = max(1, min(48, (int) (
+            core()->getConfigData('general.store.events_page.per_page')
+            ?: core()->getConfigData('general.design.events_page.per_page')
+            ?: 12
+        )));
+
+        $events = $query->paginate($eventsPerPage)->withQueryString();
         $categories = $this->eventCategoryRepository->getModel()
             ->newQuery()
             ->where('status', true)
@@ -119,22 +125,43 @@ class EventController extends Controller
             ->where('status', true)
             ->with([
                 'categories',
+                'images',
                 'fields',
-                'related_events' => function ($query) {
-                    // Admin-picked "similar" events: show if still marked published, without full listing rules (seats/end date).
-                    $query->where('status', true)->with('categories')->orderBy('title');
-                },
             ])
             ->whereKey($id)
             ->firstOrFail();
 
         $event->loadMissing([
             'categories',
+            'images',
             'fields',
-            'related_events' => function ($query) {
-                $query->where('status', true)->with('categories')->orderBy('title');
-            },
         ]);
+
+        $event->loadCount([
+            'subscribers',
+        ]);
+
+        // Suggested events: same idea/category when possible, otherwise latest.
+        $categoryIds = $event->categories?->pluck('id')->filter()->values()->all() ?? [];
+        $suggestedEventsQuery = $this->eventRepository->getModel()
+            ->newQuery()
+            ->where('status', true)
+            ->whereKeyNot($event->id)
+            ->with([
+                'categories',
+                'images',
+            ]);
+
+        if (! empty($categoryIds)) {
+            $suggestedEventsQuery->whereHas('categories', function ($q) use ($categoryIds) {
+                $q->whereIn('event_categories.id', $categoryIds);
+            });
+        }
+
+        $suggestedEvents = $suggestedEventsQuery
+            ->orderByDesc('id')
+            ->limit(4)
+            ->get();
 
         $subscribedEventIds = $this->studentSubscribedEventIds();
 
@@ -142,6 +169,7 @@ class EventController extends Controller
             'event'                        => $event,
             'isSubscribedToCurrentEvent' => in_array((int) $event->id, $subscribedEventIds, true),
             'subscribedEventIds'           => $subscribedEventIds,
+            'suggestedEvents'            => $suggestedEvents,
         ]);
     }
 }

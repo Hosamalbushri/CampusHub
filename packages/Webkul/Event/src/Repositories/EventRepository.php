@@ -78,12 +78,6 @@ class EventRepository extends Repository
         }
         unset($data['event_custom_fields_form']);
 
-        $relatedEventIds = $this->filterRelatedIdsForEvent(
-            0,
-            array_values(array_filter(array_map('intval', (array) ($data['related_events'] ?? []))))
-        );
-        unset($data['related_events']);
-
         $event = parent::create($data);
 
         if ($categoryIds !== []) {
@@ -98,9 +92,6 @@ class EventRepository extends Repository
                 }
             }
         }
-
-        $relatedEventIds = $this->filterRelatedIdsForEvent((int) $event->id, $relatedEventIds);
-        $event->related_events()->sync($relatedEventIds);
 
         return $event;
     }
@@ -125,12 +116,6 @@ class EventRepository extends Repository
         }
         unset($data['event_custom_fields_form']);
 
-        $relatedEventIds = $this->filterRelatedIdsForEvent(
-            (int) $id,
-            array_values(array_filter(array_map('intval', (array) ($data['related_events'] ?? []))))
-        );
-        unset($data['related_events']);
-
         $event = parent::update($data, $id, $attribute);
 
         if ($categoryIds !== null) {
@@ -146,9 +131,6 @@ class EventRepository extends Repository
                 }
             }
         }
-
-        $relatedEventIds = $this->filterRelatedIdsForEvent((int) $event->id, $relatedEventIds);
-        $event->related_events()->sync($relatedEventIds);
 
         return $event;
     }

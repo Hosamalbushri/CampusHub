@@ -52,7 +52,7 @@ return [
         'nav' => [
             'home' => 'الرئيسية',
             'events' => 'الفعاليات',
-            'student-login' => 'تسجيل دخول الطلاب',
+            'student-login' => 'تسجيل الدخول',
             'student-logout' => 'تسجيل الخروج',
             'student-menu' => 'قائمة حساب الطالب',
             'student-registration' => 'رقم القيد',
@@ -176,6 +176,7 @@ return [
             'heading' => 'فعاليات للطلاب',
             'subheading' => 'استعرض الفعاليات المنشورة التي يمكنك حضورها أو متابعتها.',
             'empty' => 'لا توجد فعاليات منشورة حالياً. تعرّض لاحقاً.',
+            'load-more' => 'تحميل المزيد',
             'filters' => [
                 'search' => 'بحث',
                 'search-placeholder' => 'ابحث بعنوان الفعالية',
@@ -230,6 +231,7 @@ return [
             'modal-confirm-login' => 'تسجيل الدخول للمتابعة',
             'modal-cancel' => 'إلغاء',
             'modal-close' => 'إغلاق النافذة',
+            'attendees' => 'مشارك',
         ],
         'seats' => [
             'unlimited' => 'سعة مفتوحة',
@@ -242,6 +244,15 @@ return [
         'show' => [
             'back' => 'كل الفعاليات',
             'details' => 'التفاصيل',
+            'until' => 'حتى :date',
+            'no-description' => 'لا يوجد وصف للفعالية.',
+            'organizer-fallback' => 'الجهة المنظمة',
+            'organizer-line' => 'المنظم • :location',
+            'organizer-line-fallback' => 'المنظم',
+            'seats-remaining-short' => ':count مقعد متبقي',
+            'prev-image' => 'الصورة السابقة',
+            'next-image' => 'الصورة التالية',
+            'view-all' => 'عرض الكل',
             'related' => 'فعاليات ذات صلة',
             'suggestions-title' => 'قد يعجبك أيضاً',
             'suggestions-subtitle' => 'فعاليات مشابهة نقترح عليك استكشافها.',

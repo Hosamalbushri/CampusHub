@@ -76,6 +76,7 @@ class HomeController extends Controller
                         ->newQuery()
                         ->published()
                         ->with('categories')
+                        ->withCount('subscribers')
                         ->orderByDesc('id')
                         ->limit($limit)
                         ->get();
@@ -117,6 +118,7 @@ class HomeController extends Controller
                     ->newQuery()
                     ->published()
                     ->with('categories')
+                    ->withCount('subscribers')
                     ->orderByDesc('id')
                     ->limit($limit)
                     ->get();

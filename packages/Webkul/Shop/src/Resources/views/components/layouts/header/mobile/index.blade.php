@@ -216,7 +216,7 @@
                 @else
                     <label
                         for="{{ $userDrawerId }}"
-                        class="secondary-button !shrink-0 !px-3 !py-2 text-[11px] cursor-pointer"
+                        class="primary-button !shrink-0 !px-3 !py-2 text-[11px] cursor-pointer"
                         aria-label="{{ __('shop::app.layout.nav.student-login') }}"
                     >
                         {{ __('shop::app.layout.nav.student-login') }}

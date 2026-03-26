@@ -14,7 +14,6 @@ Route::group(['prefix' => 'events'], function () {
         Route::get('edit/{id}', [EventController::class, 'edit'])->name('admin.events.edit');
         Route::put('edit/{id}', [EventController::class, 'update'])->name('admin.events.update');
         Route::get('search', [EventController::class, 'search'])->name('admin.events.search');
-        Route::get('related-tree', [EventController::class, 'relatedEventsTree'])->name('admin.events.related-tree');
         Route::delete('{id}', [EventController::class, 'destroy'])->name('admin.events.delete');
     });
 

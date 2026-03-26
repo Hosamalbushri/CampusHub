@@ -37,6 +37,10 @@
 
         return Storage::disk('public')->exists($clean) ? Storage::url($clean) : asset('storage/'.$clean);
     };
+
+    $isRtl = in_array(app()->getLocale(), ['ar', 'fa'], true);
+    $prevArrowPath = $isRtl ? 'm9 18 6-6-6-6' : 'm15 18-6-6 6-6';
+    $nextArrowPath = $isRtl ? 'm15 18-6-6 6-6' : 'm9 18 6-6-6-6';
 @endphp
 
 @if (count($images) > 0)
@@ -104,7 +108,7 @@
                             class="h-6 w-6"
                             aria-hidden="true"
                         >
-                            <path d="m9 18 6-6-6-6" />
+                            <path d="{{ $prevArrowPath }}" />
                         </svg>
                     </button>
                     <button
@@ -124,7 +128,7 @@
                             class="h-6 w-6"
                             aria-hidden="true"
                         >
-                            <path d="m15 18-6-6 6-6" />
+                            <path d="{{ $nextArrowPath }}" />
                         </svg>
                     </button>
                 </div>

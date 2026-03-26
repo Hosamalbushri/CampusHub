@@ -123,15 +123,7 @@
                         <v-event-fields></v-event-fields>
                     </div>
 
-                    <!-- Related Events Section -->
-                    @php
-                        $relatedEventsInitial = collect((array) old('related_events', []))
-                            ->map(fn ($id) => ['id' => (int) $id, 'title' => ''])
-                            ->values();
-                    @endphp
-                    <div class="box-shadow mt-4 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-900">
-                        <v-related-events :data-data='@json($relatedEventsInitial)'></v-related-events>
-                    </div>
+                    <!-- Related Events removed -->
                 </div>
 
                 <!-- Right sub-component -->
@@ -190,18 +182,18 @@
                                 <x-admin::form.control-group.error control-name="status" />
                             </x-admin::form.control-group>
 
-                            <!-- Image -->
+                            <!-- Images -->
                             <x-admin::form.control-group class="!mb-0">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.events.create.image')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::media.images
-                                    name="image"
-                                    :allow-multiple="false"
+                                    name="images"
+                                    :allow-multiple="true"
                                 />
 
-                                <x-admin::form.control-group.error control-name="image" />
+                                <x-admin::form.control-group.error control-name="images" />
                             </x-admin::form.control-group>
                         </x-slot>
                     </x-admin::accordion>
@@ -292,7 +284,5 @@
         </div>
     </x-admin::form>
 
-    @include('admin::events.partials.form-vue', [
-        'relatedEventsTreeUrl' => route('admin.events.related-tree'),
-    ])
+    @include('admin::events.partials.form-vue')
 </x-admin::layouts>

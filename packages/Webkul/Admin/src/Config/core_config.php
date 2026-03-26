@@ -114,6 +114,12 @@ return [
                 'title' => 'admin::app.configuration.index.general.store.events-page.description',
                 'type' => 'textarea',
                 'default' => 'Browse published events you can attend or follow.',
+            ], [
+                'name' => 'per_page',
+                'title' => 'admin::app.configuration.index.general.store.events-page.per-page',
+                'type' => 'number',
+                'default' => 12,
+                'validation' => 'integer|min:1|max:48',
             ],
         ],
     ], [
@@ -174,6 +180,93 @@ return [
                 'title' => 'admin::app.configuration.index.general.store.navigation.custom-2-url',
                 'type' => 'text',
                 'validation' => 'max:500',
+            ],
+        ],
+    ], [
+        'key' => 'general.store.student_login',
+        'name' => 'admin::app.configuration.index.general.store.student-login.title',
+        'info' => 'admin::app.configuration.index.general.store.student-login.title-info',
+        'sort' => 4,
+        'fields' => [
+            [
+                'name' => 'logo_image',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-logo-image',
+                'type' => 'image',
+                'channel_based' => false,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp,svg',
+            ], [
+                'name' => 'primary_color',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-primary-color',
+                'type' => 'color',
+                'default' => '#2563eb',
+            ], [
+                'name' => 'accent_color',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-accent-color',
+                'type' => 'color',
+                'default' => '#7c3aed',
+            ], [
+                'name' => 'surface_start',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-surface-start',
+                'type' => 'color',
+                'default' => '#f9fafb',
+            ], [
+                'name' => 'surface_end',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-surface-end',
+                'type' => 'color',
+                'default' => '#ffffff',
+            ], [
+                'name' => 'panel_start',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-panel-start',
+                'type' => 'color',
+                'default' => '#0f172a',
+            ], [
+                'name' => 'panel_end',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-panel-end',
+                'type' => 'color',
+                'default' => '#1d4ed8',
+            ], [
+                'name' => 'title',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-title',
+                'type' => 'text',
+                'validation' => 'max:255',
+            ], [
+                'name' => 'description',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-description',
+                'type' => 'textarea',
+            ], [
+                'name' => 'eyebrow',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-eyebrow',
+                'type' => 'text',
+                'validation' => 'max:100',
+            ], [
+                'name' => 'panel_lead',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-panel-lead',
+                'type' => 'textarea',
+            ], [
+                'name' => 'card_number',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-card-number',
+                'type' => 'text',
+                'validation' => 'max:255',
+            ], [
+                'name' => 'password',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-password',
+                'type' => 'text',
+                'validation' => 'max:255',
+            ], [
+                'name' => 'remember',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-remember',
+                'type' => 'text',
+                'validation' => 'max:255',
+            ], [
+                'name' => 'submit',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-submit',
+                'type' => 'text',
+                'validation' => 'max:255',
+            ], [
+                'name' => 'back_portal',
+                'title' => 'admin::app.configuration.index.general.store.student-login.field-back-portal',
+                'type' => 'text',
+                'validation' => 'max:255',
             ],
         ],
     ], [

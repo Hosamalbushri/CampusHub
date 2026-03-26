@@ -176,6 +176,7 @@ return [
             'heading' => 'Events for students',
             'subheading' => 'Browse published events you can attend or follow.',
             'empty' => 'No published events yet. Please check again later.',
+            'load-more' => 'Load more',
             'filters' => [
                 'search' => 'Search',
                 'search-placeholder' => 'Search by event title',
@@ -230,6 +231,7 @@ return [
             'modal-confirm-login' => 'Sign in to continue',
             'modal-cancel' => 'Cancel',
             'modal-close' => 'Close dialog',
+            'attendees' => 'attendees',
         ],
         'seats' => [
             'unlimited' => 'Open capacity',
@@ -242,6 +244,15 @@ return [
         'show' => [
             'back' => 'All events',
             'details' => 'Details',
+            'until' => 'Until :date',
+            'no-description' => 'No description available.',
+            'organizer-fallback' => 'Organizer',
+            'organizer-line' => 'Organizer • :location',
+            'organizer-line-fallback' => 'Organizer',
+            'seats-remaining-short' => ':count seats left',
+            'prev-image' => 'Previous image',
+            'next-image' => 'Next image',
+            'view-all' => 'View all',
             'related' => 'Related events',
             'suggestions-title' => 'You may also like',
             'suggestions-subtitle' => 'Similar events you might want to explore next.',

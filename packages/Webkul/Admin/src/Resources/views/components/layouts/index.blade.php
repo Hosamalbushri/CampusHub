@@ -47,8 +47,10 @@
         vite()->set(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
     }}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet"
     />
 
@@ -83,6 +85,11 @@
     <style>
         :root {
             --brand-color: {{ $brandColor }};
+        }
+
+        :root,
+        body {
+            font-family: 'Cairo', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
         }
 
         {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}

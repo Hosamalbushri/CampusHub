@@ -14,6 +14,7 @@ class StudentEventsController extends Controller
 
         $events = $student->subscribedEvents()
             ->with('categories')
+            ->withCount('subscribers')
             ->orderByDesc('events.id')
             ->paginate(12);
 

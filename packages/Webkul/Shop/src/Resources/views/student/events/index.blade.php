@@ -14,24 +14,22 @@
                 <p class="text-[color:var(--shop-text-muted)]">{{ __('shop::app.student.events.empty') }}</p>
             </div>
         @else
-            <div class="overflow-hidden rounded-2xl border border-[color:var(--shop-border-soft)] bg-[color:var(--shop-surface)]/40 shadow-sm">
-                <ul class="grid gap-6 p-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 lg:p-8">
-                    @foreach ($events as $event)
-                        <li class="min-w-0">
-                            @include('shop::events.partials.event-card', [
-                                'event' => $event,
-                                'variant' => 'grid',
-                                'showExcerpt' => true,
-                                'subscribedEventIds' => $subscribedEventIds ?? [],
-                                'allowUnsubscribe' => true,
-                            ])
-                        </li>
-                    @endforeach
-                </ul>
+            <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+                @foreach ($events as $event)
+                    <li class="min-w-0">
+                        @include('shop::events.partials.event-card', [
+                            'event' => $event,
+                            'variant' => 'grid',
+                            'showExcerpt' => true,
+                            'subscribedEventIds' => $subscribedEventIds ?? [],
+                            'allowUnsubscribe' => true,
+                        ])
+                    </li>
+                @endforeach
+            </ul>
 
-                <div class="border-t border-[color:var(--shop-border-soft)] bg-white px-6 py-5 lg:px-8">
-                    {{ $events->links() }}
-                </div>
+            <div class="mt-8">
+                {{ $events->links() }}
             </div>
         @endif
     </div>

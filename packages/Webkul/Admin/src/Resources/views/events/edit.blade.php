@@ -132,21 +132,7 @@
                         <v-event-fields :data-data='@json($event->fields ?? [])'></v-event-fields>
                     </div>
 
-                    <!-- Related Events Section -->
-                    @php
-                        if (old('related_events') !== null) {
-                            $eventRelatedEventsForVue = collect((array) old('related_events'))
-                                ->map(fn ($id) => ['id' => (int) $id, 'title' => ''])
-                                ->values();
-                        } else {
-                            $eventRelatedEventsForVue = ($event->related_events ?: collect())
-                                ->map(fn ($e) => ['id' => $e->id, 'title' => $e->title])
-                                ->values();
-                        }
-                    @endphp
-                    <div class="box-shadow mt-4 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-900">
-                        <v-related-events :data-data='@json($eventRelatedEventsForVue)'></v-related-events>
-                    </div>
+                    <!-- Related Events removed -->
                 </div>
 
                 <!-- Right sub-component -->
@@ -205,19 +191,19 @@
                                 <x-admin::form.control-group.error control-name="status" />
                             </x-admin::form.control-group>
 
-                            <!-- Image -->
+                            <!-- Images -->
                             <x-admin::form.control-group class="!mb-0">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.events.create.image')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::media.images
-                                    name="image"
-                                    :allow-multiple="false"
-                                    :uploaded-images="$event->image ? [['id' => 'image', 'url' => Storage::url($event->image)]] : []"
+                                    name="images"
+                                    :allow-multiple="true"
+                                    :uploaded-images="$event->images->map(fn ($img) => ['id' => $img->path, 'url' => Storage::url($img->path)])->values()->all()"
                                 />
 
-                                <x-admin::form.control-group.error control-name="image" />
+                                <x-admin::form.control-group.error control-name="images" />
                             </x-admin::form.control-group>
                         </x-slot>
                     </x-admin::accordion>
@@ -308,7 +294,5 @@
         </div>
     </x-admin::form>
 
-    @include('admin::events.partials.form-vue', [
-        'relatedEventsTreeUrl' => route('admin.events.related-tree', ['exclude' => $event->id]),
-    ])
+    @include('admin::events.partials.form-vue')
 </x-admin::layouts>

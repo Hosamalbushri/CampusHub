@@ -3,9 +3,11 @@
 namespace Webkul\Admin\Http\Controllers\Events;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Event\EventDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Event\Models\Event;
 use Webkul\Event\Models\EventCategory;
 use Webkul\Event\Repositories\EventRepository;
 
@@ -42,26 +44,19 @@ class EventController extends Controller
             'available_seats' => 'nullable|integer|min:0',
             'availability_use_seats' => 'nullable|boolean',
             'status' => 'nullable|boolean',
-            'image.*' => 'nullable|file|image',
+            'images' => 'nullable|array',
+            'images.*' => 'nullable',
             'description' => 'nullable|string',
             'fields.*.name' => 'required_with:fields|string',
             'fields.*.type' => 'required_with:fields|string',
             'fields.*.value' => 'nullable',
-            'related_events' => 'nullable|array',
-            'related_events.*' => 'integer|exists:events,id',
         ]);
 
         $data = request()->all();
 
-        $data['related_events'] = (array) request()->input('related_events', []);
-
         $data = $this->mergeEventFormData($data);
 
-        if (request()->hasFile('image')) {
-            $file = request()->file('image');
-            if (is_array($file)) $file = $file[0];
-            $data['image'] = $file->store('events', 'public');
-        }
+        unset($data['image']);
 
         if (isset($data['fields'])) {
             foreach ($data['fields'] as $key => $field) {
@@ -75,7 +70,8 @@ class EventController extends Controller
             }
         }
 
-        $this->eventRepository->create($data);
+        $event = $this->eventRepository->create($data);
+        $this->syncEventImages($event);
 
         session()->flash('success', trans('admin::app.events.create-success'));
 
@@ -84,7 +80,7 @@ class EventController extends Controller
 
     public function edit(int $id): View
     {
-        $event = $this->eventRepository->with(['fields', 'related_events', 'categories'])->findOrFail($id);
+        $event = $this->eventRepository->with(['fields', 'categories', 'images'])->findOrFail($id);
 
         return view('admin::events.edit', compact('event'));
     }
@@ -101,29 +97,22 @@ class EventController extends Controller
             'available_seats' => 'nullable|integer|min:0',
             'availability_use_seats' => 'nullable|boolean',
             'status' => 'nullable|boolean',
-            'image.*' => 'nullable|file|image',
+            'images' => 'nullable|array',
+            'images.*' => 'nullable',
             'description' => 'nullable|string',
             'fields.*.name' => 'required_with:fields|string',
             'fields.*.type' => 'required_with:fields|string',
             'fields.*.value' => 'nullable',
-            'related_events' => 'nullable|array',
-            'related_events.*' => 'integer|exists:events,id',
         ]);
 
         $data = request()->all();
-
-        $data['related_events'] = (array) request()->input('related_events', []);
+//        return response()->json([
+//            'data' => $data,
+//        ]);
 
         $data = $this->mergeEventFormData($data);
 
-        if (request()->hasFile('image')) {
-            $file = request()->file('image');
-            if (is_array($file)) $file = $file[0];
-            $data['image'] = $file->store('events', 'public');
-        } else {
-            // Prevent wiping out the existing image when no new image is provided
-            unset($data['image']);
-        }
+        unset($data['image']);
 
         if (isset($data['fields'])) {
             foreach ($data['fields'] as $key => $field) {
@@ -140,7 +129,8 @@ class EventController extends Controller
             }
         }
 
-        $this->eventRepository->update($data, $id);
+        $event = $this->eventRepository->update($data, $id);
+        $this->syncEventImages($event);
 
         session()->flash('success', trans('admin::app.events.update-success'));
 
@@ -167,103 +157,6 @@ class EventController extends Controller
         return response()->json([
             'data' => $results,
         ]);
-    }
-
-    /**
-     * Flat rows for related-events picker: category headers + events nested by category tree (checkboxes only on events).
-     */
-    public function relatedEventsTree(): JsonResponse
-    {
-        $excludeId = (int) request()->input('exclude', 0) ?: null;
-
-        $categories = EventCategory::query()
-            ->orderBy('sort_order')
-            ->orderBy('id')
-            ->get();
-
-        $eventsQuery = $this->eventRepository->getModel()
-            ->newQuery()
-            ->with(['categories:id'])
-            ->orderBy('title');
-
-        if ($excludeId) {
-            $eventsQuery->where('id', '!=', $excludeId);
-        }
-
-        $events = $eventsQuery->get();
-
-        $eventsByCategory = [];
-        foreach ($events as $event) {
-            $catIds = $event->categories->pluck('id')->all();
-            if ($catIds === []) {
-                $eventsByCategory[0][] = $event;
-            } else {
-                foreach ($catIds as $cid) {
-                    $eventsByCategory[(int) $cid][] = $event;
-                }
-            }
-        }
-
-        $rows = [];
-        $this->appendRelatedEventsCategoryBranch($categories, null, 0, $eventsByCategory, $rows);
-
-        $uncategorized = collect($eventsByCategory[0] ?? [])->unique('id')->sortBy('title')->values();
-        if ($uncategorized->isNotEmpty()) {
-            $rows[] = [
-                'kind'   => 'category',
-                'indent' => 0,
-                'name'   => trans('admin::app.events.create.related-events.uncategorized'),
-            ];
-            foreach ($uncategorized as $event) {
-                $rows[] = [
-                    'kind'   => 'event',
-                    'indent' => 1,
-                    'id'     => $event->id,
-                    'title'  => $event->title,
-                ];
-            }
-        }
-
-        return response()->json([
-            'data' => $rows,
-        ]);
-    }
-
-    /**
-     * @param  array<int, list<\Webkul\Event\Models\Event>>  $eventsByCategory
-     * @param  list<array<string, mixed>>  $rows
-     */
-    protected function appendRelatedEventsCategoryBranch(
-        \Illuminate\Support\Collection $allCategories,
-        ?int $parentId,
-        int $indent,
-        array $eventsByCategory,
-        array &$rows
-    ): void {
-        $nodes = $allCategories
-            ->where('parent_id', $parentId)
-            ->sortBy(fn ($c) => [(int) $c->sort_order, (int) $c->id])
-            ->values();
-
-        foreach ($nodes as $cat) {
-            $rows[] = [
-                'kind'   => 'category',
-                'indent' => $indent,
-                'name'   => $cat->name,
-            ];
-
-            $evs = collect($eventsByCategory[$cat->id] ?? [])->unique('id')->sortBy('title')->values();
-            foreach ($evs as $event) {
-                $rows[] = [
-                    'kind'   => 'event',
-                    'indent' => $indent + 1,
-                    'id'     => $event->id,
-                    'title'  => $event->title,
-                ];
-            }
-
-            $this->appendRelatedEventsCategoryBranch($allCategories, (int) $cat->id, $indent + 1, $eventsByCategory, $rows);
-        }
     }
 
     public function destroy(int $id): JsonResponse
@@ -307,4 +200,48 @@ class EventController extends Controller
 
         return $data;
     }
+
+    protected function syncEventImages(Event $event): void
+    {
+        $existingPaths = array_values(array_filter(array_map(
+            'strval',
+            array_keys((array) request()->input('images', []))
+        )));
+
+        $uploadedPaths = [];
+        foreach ((array) request()->file('images', []) as $file) {
+            if ($file instanceof \Illuminate\Http\UploadedFile) {
+                $uploadedPaths[] = $file->store('events', 'public');
+            }
+        }
+
+        $finalPaths = array_values(array_unique(array_filter(array_merge($existingPaths, $uploadedPaths))));
+
+        if ($finalPaths === [] && $event->image) {
+            // Preserve legacy single image if no gallery payload was provided.
+            $finalPaths[] = (string) $event->image;
+        }
+
+        $current = $event->images()->pluck('path')->all();
+        $toDelete = array_values(array_diff($current, $finalPaths));
+
+        if ($toDelete !== []) {
+            foreach ($toDelete as $path) {
+                Storage::disk('public')->delete($path);
+            }
+        }
+
+        $event->images()->delete();
+
+        foreach ($finalPaths as $index => $path) {
+            $event->images()->create([
+                'path'     => $path,
+                'position' => $index,
+            ]);
+        }
+
+        $event->image = $finalPaths[0] ?? null;
+        $event->save();
+    }
+
 }

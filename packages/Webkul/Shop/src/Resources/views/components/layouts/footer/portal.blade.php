@@ -57,6 +57,7 @@
     $needsCsrf = $newsAction !== '' && (str_starts_with($newsAction, '/') || str_starts_with($newsAction, url('/')));
 
     $parallaxOn = ($fx['parallax'] ?? false) && ($fx['orbs'] ?? false);
+    $isRtl = in_array(app()->getLocale(), ['ar', 'fa'], true);
 
     $brandLogoPath = trim((string) ($pf['brand']['logo_path'] ?? ''));
     $brandLogoUrl = '';
@@ -94,7 +95,7 @@
         background: linear-gradient(180deg, var(--pf-bg-start) 0%, var(--pf-bg-end) 100%);
     "
 >
-    <div class="relative w-full overflow-x-hidden">
+    <div class="relative w-full overflow-hidden">
         @if ($fx['orbs'] ?? false)
             <div class="pf-orb pf-orb-1 pf-bg-orb pointer-events-none absolute rounded-full opacity-40 blur-[100px] {{ $parallaxOn ? 'pf-orb-no-anim' : '' }}" aria-hidden="true"></div>
             <div class="pf-orb pf-orb-2 pf-bg-orb pointer-events-none absolute rounded-full opacity-40 blur-[100px] {{ $parallaxOn ? 'pf-orb-no-anim' : '' }}" aria-hidden="true"></div>
@@ -160,20 +161,20 @@
                             <h3 class="mb-4 text-lg font-bold" style="color: var(--pf-text);">{{ $col['title'] }}</h3>
                         @endif
                         @if (count($col['links'] ?? []) > 0)
-                            <ul class="flex flex-col items-center gap-2 text-sm">
+                            <ul class="mx-auto flex w-full max-w-xs flex-col items-center gap-2 text-sm text-center">
                                 @foreach ($col['links'] as $link)
                                     @php $lab = trim((string) ($link['label'] ?? '')); $u = trim((string) ($link['url'] ?? '')); @endphp
                                     @if ($lab !== '')
-                                        <li class="w-full max-w-xs">
+                                        <li class="w-full">
                                             @if ($u !== '')
                                                 <a href="{{ e($u) }}" class="pf-column-link inline-flex w-full items-center justify-center gap-2 transition duration-200" style="color: var(--pf-text-muted);">
                                                     @if (! empty($col['show_chevron']) && ($fx['font_awesome'] ?? false))
-                                                        <i class="fas fa-chevron-right text-[10px] opacity-70 transition-transform duration-200 rtl:rotate-180" aria-hidden="true"></i>
+                                                        <i class="fas {{ $isRtl ? 'fa-chevron-left' : 'fa-chevron-right' }} text-[10px] opacity-70 transition-transform duration-200" aria-hidden="true"></i>
                                                     @endif
                                                     {{ $lab }}
                                                 </a>
                                             @else
-                                                <span class="block" style="color: var(--pf-text-muted);">{{ $lab }}</span>
+                                                <span class="block text-center" style="color: var(--pf-text-muted);">{{ $lab }}</span>
                                             @endif
                                         </li>
                                     @endif

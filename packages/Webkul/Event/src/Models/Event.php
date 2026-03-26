@@ -41,9 +41,9 @@ class Event extends Model implements EventContract
         return $this->hasMany(EventFieldProxy::modelClass());
     }
 
-    public function related_events()
+    public function images()
     {
-        return $this->belongsToMany(static::class, 'event_related', 'event_id', 'related_event_id');
+        return $this->hasMany(EventImage::class)->orderBy('position')->orderBy('id');
     }
 
     /**

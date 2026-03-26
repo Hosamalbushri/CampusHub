@@ -1,6 +1,5 @@
 @php
     $eventsStorageBase = rtrim(asset('storage'), '/');
-    $relatedEventsTreeUrl = $relatedEventsTreeUrl ?? route('admin.events.related-tree');
 @endphp
 
 @pushOnce('scripts')
@@ -60,117 +59,60 @@
                             v-bind:key="idx"
                         >
                             <x-admin::table.td class="!align-top !py-4">
-                                <x-admin::form.control-group class="!mb-0">
-                                    <x-admin::form.control-group.label class="required text-gray-800 dark:text-gray-100">
-                                        @lang('admin::app.events.create.custom-fields.field-name')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        ::name="'fields[' + idx + '][name]'"
-                                        rules="required"
-                                        label="{{ __('admin::app.events.create.custom-fields.field-name') }}"
-                                        placeholder="{{ __('admin::app.events.create.custom-fields.placeholder-name') }}"
-                                        ::value="field.name"
-                                    />
-
-                                    <x-admin::form.control-group.error ::name="'fields[' + idx + '][name]'" />
-                                </x-admin::form.control-group>
+                                <label class="mb-1 block text-xs font-medium text-gray-700 dark:text-gray-200">
+                                    @lang('admin::app.events.create.custom-fields.field-name')
+                                </label>
+                                <input
+                                    type="text"
+                                    v-model="field.name"
+                                    :name="'fields[' + idx + '][name]'"
+                                    class="w-full rounded border border-gray-200 px-2.5 py-2 text-sm text-gray-800 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200"
+                                    placeholder="{{ __('admin::app.events.create.custom-fields.placeholder-name') }}"
+                                />
                             </x-admin::table.td>
 
                             <x-admin::table.td class="!align-top !py-4">
-                                <x-admin::form.control-group class="!mb-0">
-                                    <x-admin::form.control-group.label class="required text-gray-800 dark:text-gray-100">
-                                        @lang('admin::app.events.create.custom-fields.field-type')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        class="cursor-pointer min-w-[11rem] !bg-white !text-gray-900 dark:!bg-gray-900 dark:!text-gray-100"
-                                        ::name="'fields[' + idx + '][type]'"
-                                        rules="required"
-                                        label="{{ __('admin::app.events.create.custom-fields.field-type') }}"
-                                        v-model="field.type"
-                                        v-on:change="onFieldTypeChange(field)"
-                                    >
-                                        <option
-                                            class="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
-                                            value="text"
-                                        >
-                                            @lang('admin::app.events.create.custom-fields.type-text')
-                                        </option>
-
-                                        <option
-                                            class="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
-                                            value="textarea"
-                                        >
-                                            @lang('admin::app.events.create.custom-fields.type-textarea')
-                                        </option>
-
-                                        <option
-                                            class="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
-                                            value="number"
-                                        >
-                                            @lang('admin::app.events.create.custom-fields.type-number')
-                                        </option>
-
-                                        <option
-                                            class="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
-                                            value="date"
-                                        >
-                                            @lang('admin::app.events.create.custom-fields.type-date')
-                                        </option>
-
-                                        <option
-                                            class="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
-                                            value="time"
-                                        >
-                                            @lang('admin::app.events.create.custom-fields.type-time')
-                                        </option>
-
-                                        <option
-                                            class="bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
-                                            value="image"
-                                        >
-                                            @lang('admin::app.events.create.custom-fields.type-image')
-                                        </option>
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error ::name="'fields[' + idx + '][type]'" />
-                                </x-admin::form.control-group>
+                                <label class="mb-1 block text-xs font-medium text-gray-700 dark:text-gray-200">
+                                    @lang('admin::app.events.create.custom-fields.field-type')
+                                </label>
+                                <select
+                                    v-model="field.type"
+                                    :name="'fields[' + idx + '][type]'"
+                                    @change="onFieldTypeChange(field)"
+                                    class="custom-select min-w-[11rem] w-full cursor-pointer rounded border border-gray-200 px-2.5 py-2 text-sm text-gray-800 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200"
+                                >
+                                    <option value="text">@lang('admin::app.events.create.custom-fields.type-text')</option>
+                                    <option value="textarea">@lang('admin::app.events.create.custom-fields.type-textarea')</option>
+                                    <option value="number">@lang('admin::app.events.create.custom-fields.type-number')</option>
+                                    <option value="date">@lang('admin::app.events.create.custom-fields.type-date')</option>
+                                    <option value="time">@lang('admin::app.events.create.custom-fields.type-time')</option>
+                                    <option value="image">@lang('admin::app.events.create.custom-fields.type-image')</option>
+                                </select>
                             </x-admin::table.td>
 
                             <x-admin::table.td class="!align-top !py-4">
-                                <x-admin::form.control-group class="!mb-0">
-                                    <x-admin::form.control-group.label class="text-gray-800 dark:text-gray-100">
-                                        @lang('admin::app.events.create.custom-fields.field-value')
-                                    </x-admin::form.control-group.label>
-
-                                    <div v-bind:key="'event-field-val-' + idx + '-' + field.type">
+                                <label class="mb-1 block text-xs font-medium text-gray-700 dark:text-gray-200">
+                                    @lang('admin::app.events.create.custom-fields.field-value')
+                                </label>
+                                <div v-bind:key="'event-field-val-' + idx + '-' + field.type">
                                     <template v-if="field.type === 'textarea'">
-                                        <x-admin::form.control-group.control
-                                            v-bind:key="'val-' + idx + '-textarea'"
-                                            type="textarea"
-                                            ::name="'fields[' + idx + '][value]'"
-                                            label="{{ __('admin::app.events.create.custom-fields.field-value') }}"
+                                        <textarea
+                                            v-model="field.value"
+                                            :name="'fields[' + idx + '][value]'"
+                                            class="w-full rounded border border-gray-200 px-2.5 py-2 text-sm text-gray-800 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200"
                                             placeholder="{{ __('admin::app.events.create.custom-fields.placeholder-value') }}"
-                                            ::value="field.value"
-                                        />
-
-                                        <x-admin::form.control-group.error ::name="'fields[' + idx + '][value]'" />
+                                        ></textarea>
                                     </template>
 
                                     <template v-else-if="field.type === 'image'">
-                                        <x-admin::form.control-group.control
-                                            v-bind:key="'val-' + idx + '-old'"
+                                        <input
                                             type="hidden"
-                                            ::name="'fields[' + idx + '][old_value]'"
-                                            ::value="field.value"
-                                        />
+                                            :name="'fields[' + idx + '][old_value]'"
+                                            :value="field.value"
+                                        >
 
                                         <div
                                             v-if="field.value"
-                                            v-bind:key="'val-' + idx + '-link'"
                                             class="mb-2"
                                         >
                                             <a
@@ -182,67 +124,51 @@
                                             </a>
                                         </div>
 
-                                        <x-admin::form.control-group.control
-                                            v-bind:key="'val-' + idx + '-file'"
+                                        <input
                                             type="file"
-                                            ::name="'fields[' + idx + '][value]'"
-                                            label="{{ __('admin::app.events.create.custom-fields.field-value') }}"
-                                        />
-
-                                        <x-admin::form.control-group.error ::name="'fields[' + idx + '][value]'" />
-                                    </template>
-
-                                    <template v-else-if="field.type === 'text'">
-                                        <x-admin::form.control-group.control
-                                            v-bind:key="'val-' + idx + '-text'"
-                                            type="text"
-                                            ::name="'fields[' + idx + '][value]'"
-                                            label="{{ __('admin::app.events.create.custom-fields.field-value') }}"
-                                            placeholder="{{ __('admin::app.events.create.custom-fields.placeholder-value') }}"
-                                            ::value="field.value"
-                                        />
-
-                                        <x-admin::form.control-group.error ::name="'fields[' + idx + '][value]'" />
+                                            :name="'fields[' + idx + '][value]'"
+                                            class="w-full rounded border border-gray-200 px-2.5 py-2 text-sm text-gray-800 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200"
+                                        >
                                     </template>
 
                                     <template v-else-if="field.type === 'number'">
-                                        <x-admin::form.control-group.control
-                                            v-bind:key="'val-' + idx + '-number'"
+                                        <input
                                             type="number"
-                                            ::name="'fields[' + idx + '][value]'"
-                                            label="{{ __('admin::app.events.create.custom-fields.field-value') }}"
+                                            v-model="field.value"
+                                            :name="'fields[' + idx + '][value]'"
+                                            class="w-full rounded border border-gray-200 px-2.5 py-2 text-sm text-gray-800 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200"
                                             placeholder="{{ __('admin::app.events.create.custom-fields.placeholder-value') }}"
-                                            ::value="field.value"
-                                        />
-
-                                        <x-admin::form.control-group.error ::name="'fields[' + idx + '][value]'" />
+                                        >
                                     </template>
 
                                     <template v-else-if="field.type === 'date'">
-                                        <x-admin::form.control-group.control
-                                            v-bind:key="'val-' + idx + '-date'"
+                                        <input
                                             type="date"
-                                            ::name="'fields[' + idx + '][value]'"
-                                            label="{{ __('admin::app.events.create.custom-fields.field-value') }}"
-                                            ::value="field.value"
-                                        />
-
-                                        <x-admin::form.control-group.error ::name="'fields[' + idx + '][value]'" />
+                                            v-model="field.value"
+                                            :name="'fields[' + idx + '][value]'"
+                                            class="w-full rounded border border-gray-200 px-2.5 py-2 text-sm text-gray-800 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200"
+                                        >
                                     </template>
 
                                     <template v-else-if="field.type === 'time'">
-                                        <x-admin::form.control-group.control
-                                            v-bind:key="'val-' + idx + '-time'"
+                                        <input
                                             type="time"
-                                            ::name="'fields[' + idx + '][value]'"
-                                            label="{{ __('admin::app.events.create.custom-fields.field-value') }}"
-                                            ::value="field.value"
-                                        />
-
-                                        <x-admin::form.control-group.error ::name="'fields[' + idx + '][value]'" />
+                                            v-model="field.value"
+                                            :name="'fields[' + idx + '][value]'"
+                                            class="w-full rounded border border-gray-200 px-2.5 py-2 text-sm text-gray-800 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200"
+                                        >
                                     </template>
-                                    </div>
-                                </x-admin::form.control-group>
+
+                                    <template v-else>
+                                        <input
+                                            type="text"
+                                            v-model="field.value"
+                                            :name="'fields[' + idx + '][value]'"
+                                            class="w-full rounded border border-gray-200 px-2.5 py-2 text-sm text-gray-800 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200"
+                                            placeholder="{{ __('admin::app.events.create.custom-fields.placeholder-value') }}"
+                                        >
+                                    </template>
+                                </div>
                             </x-admin::table.td>
 
                             <x-admin::table.td class="!align-top !px-4 !py-4 text-right">
@@ -263,92 +189,6 @@
             >
                 @lang('admin::app.events.create.custom-fields.empty')
             </div>
-        </div>
-    </script>
-
-    <script
-        type="text/x-template"
-        id="v-related-events-template"
-    >
-        <div class="flex flex-col gap-4">
-            <div>
-                <p class="text-base font-semibold text-gray-800 dark:text-white">
-                    @lang('admin::app.events.create.related-events.title')
-                </p>
-
-                <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
-                    @lang('admin::app.events.create.related-events.tree-hint')
-                </p>
-            </div>
-
-            <template v-if="isLoading">
-                <x-admin::shimmer.tree />
-            </template>
-
-            <template v-else>
-                <div
-                    v-if="flatRows.length"
-                    class="max-h-96 overflow-y-auto rounded-lg border border-gray-200 bg-gray-50/50 p-2 dark:border-gray-700 dark:bg-gray-950/30"
-                >
-                    <template
-                        v-for="(row, rowIdx) in flatRows"
-                        v-bind:key="row.kind === 'event' ? 'e-' + row.id + '-' + rowIdx : 'c-' + rowIdx + '-' + row.indent"
-                    >
-                        <div
-                            v-if="row.kind === 'category'"
-                            class="select-none border-t border-gray-200 py-2 text-sm font-semibold text-gray-800 first:border-t-0 dark:border-gray-700 dark:text-white"
-                            v-bind:style="{ paddingLeft: (row.indent * 14) + 'px' }"
-                        >
-                            @{{ row.name }}
-                        </div>
-
-                        <label
-                            v-else
-                            class="flex cursor-pointer items-center gap-2.5 rounded-md py-1.5 text-sm text-gray-700 hover:bg-white/80 dark:text-gray-300 dark:hover:bg-gray-900/50"
-                            v-bind:style="{ paddingLeft: (row.indent * 14) + 'px' }"
-                        >
-                            <input
-                                type="checkbox"
-                                class="peer hidden"
-                                v-bind:checked="isSelected(row.id)"
-                                v-on:change="toggleEvent(row.id)"
-                            />
-
-                            <span class="icon-checkbox-outline peer-checked:icon-checkbox-select shrink-0 cursor-pointer rounded-md text-xl text-gray-600 peer-checked:text-brandColor dark:text-gray-400">
-                            </span>
-
-                            <span class="min-w-0 flex-1">
-                                @{{ row.title }}
-                            </span>
-                        </label>
-                    </template>
-                </div>
-
-                <div
-                    v-else
-                    class="rounded-lg border border-dashed border-gray-300 bg-gray-50 py-6 text-center text-sm text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
-                >
-                    @lang('admin::app.events.create.related-events.empty-tree')
-                </div>
-
-                <template
-                    v-for="id in selectedIdsSorted"
-                    v-bind:key="'rel-h-' + id"
-                >
-                    <input
-                        type="hidden"
-                        name="related_events[]"
-                        v-bind:value="id"
-                    />
-                </template>
-
-                <p
-                    v-if="selectedIds.length === 0 && flatRows.length"
-                    class="mt-2 text-xs text-gray-500 dark:text-gray-400"
-                >
-                    @lang('admin::app.events.create.related-events.empty')
-                </p>
-            </template>
         </div>
     </script>
 
@@ -386,85 +226,6 @@
                     const p = (path || '').replace(/^\//, '');
 
                     return p ? base + '/' + p : base;
-                },
-            },
-        });
-
-        app.component('v-related-events', {
-            template: '#v-related-events-template',
-
-            props: {
-                dataData: {
-                    type: Array,
-                    default: () => [],
-                },
-            },
-
-            data() {
-                return {
-                    isLoading: true,
-                    flatRows: [],
-                    selectedIds: [],
-                };
-            },
-
-            computed: {
-                selectedIdsSorted() {
-                    return [...this.selectedIds].sort((a, b) => a - b);
-                },
-            },
-
-            created() {
-                this.syncSelectedFromProp();
-            },
-
-            watch: {
-                dataData: {
-                    deep: true,
-                    handler() {
-                        this.syncSelectedFromProp();
-                    },
-                },
-            },
-
-            mounted() {
-                this.loadTree();
-            },
-
-            methods: {
-                syncSelectedFromProp() {
-                    const src = Array.isArray(this.dataData) ? this.dataData : [];
-
-                    this.selectedIds = src
-                        .map((e) => Number(e && e.id))
-                        .filter((id) => id > 0);
-                },
-
-                loadTree() {
-                    axios
-                        .get(@json($relatedEventsTreeUrl))
-                        .then((response) => {
-                            this.isLoading = false;
-                            this.flatRows = response.data.data || [];
-                        })
-                        .catch(() => {
-                            this.isLoading = false;
-                            this.flatRows = [];
-                        });
-                },
-
-                isSelected(id) {
-                    return this.selectedIds.includes(id);
-                },
-
-                toggleEvent(id) {
-                    const idx = this.selectedIds.indexOf(id);
-
-                    if (idx === -1) {
-                        this.selectedIds.push(id);
-                    } else {
-                        this.selectedIds.splice(idx, 1);
-                    }
                 },
             },
         });
