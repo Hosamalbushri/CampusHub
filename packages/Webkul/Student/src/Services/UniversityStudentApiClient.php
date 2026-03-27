@@ -14,9 +14,20 @@ class UniversityStudentApiClient implements UniversityStudentApiContract
 {
     public function verifyAndFetchProfile(string $universityCardNumber, string $password): StudentProfileDto
     {
-        $baseUrl = rtrim((string) config('student.university.base_url'), '/');
-        $path = ltrim((string) config('student.university.verify_path'), '/');
-        $url = $baseUrl.'/'.$path;
+        $configuredEndpoint = trim((string) core()->getConfigData('general.university_api.endpoint_settings.endpoint'));
+
+        if ($configuredEndpoint === '') {
+            // Backward compatibility with the previous nested settings key.
+            $configuredEndpoint = trim((string) core()->getConfigData('general.settings.university_api.endpoint'));
+        }
+
+        if ($configuredEndpoint !== '') {
+            $url = $configuredEndpoint;
+        } else {
+            $baseUrl = rtrim((string) config('student.university.base_url'), '/');
+            $path = ltrim((string) config('student.university.verify_path'), '/');
+            $url = $baseUrl.'/'.$path;
+        }
 
         $bodyKeys = config('student.university.request_body_keys', []);
         $payload = [];

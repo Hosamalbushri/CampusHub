@@ -44,7 +44,7 @@ class StudentServiceProvider extends ServiceProvider
         Route::middleware(['web', 'admin_locale', PreventRequestsDuringMaintenance::class])
             ->group(__DIR__.'/../Routes/web.php');
 
-        $this->loadMigrationsFrom(__DIR__.'/../../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'student');
 

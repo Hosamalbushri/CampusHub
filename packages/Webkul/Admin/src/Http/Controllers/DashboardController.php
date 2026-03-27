@@ -14,14 +14,10 @@ class DashboardController extends Controller
      * @var array
      */
     protected $typeFunctions = [
-        'over-all' => 'getOverAllStats',
-        'revenue-stats' => 'getRevenueStats',
-        'total-leads' => 'getTotalLeadsStats',
-        'revenue-by-sources' => 'getLeadsStatsBySources',
-        'revenue-by-types' => 'getLeadsStatsByTypes',
-        'top-selling-products' => 'getTopSellingProducts',
-        'top-persons' => 'getTopPersons',
-        'open-leads-by-states' => 'getOpenLeadsByStates',
+        'events-students-over-all' => 'getEventsStudentsOverAllStats',
+        'student-subscriptions-over-time' => 'getStudentSubscriptionsOverTime',
+        'events-status-distribution' => 'getEventsStatusDistribution',
+        'top-subscribed-events' => 'getTopSubscribedEvents',
     ];
 
     /**
@@ -51,7 +47,16 @@ class DashboardController extends Controller
      */
     public function stats()
     {
-        $stats = $this->dashboardHelper->{$this->typeFunctions[request()->query('type')]}();
+        $type = request()->query('type');
+
+        if (! isset($this->typeFunctions[$type])) {
+            return response()->json([
+                'statistics' => [],
+                'date_range' => $this->dashboardHelper->getDateRange(),
+            ], 422);
+        }
+
+        $stats = $this->dashboardHelper->{$this->typeFunctions[$type]}();
 
         return response()->json([
             'statistics' => $stats,

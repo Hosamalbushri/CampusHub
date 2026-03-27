@@ -16,15 +16,16 @@
             </div>
 
             <div class="flex items-center gap-x-2.5">
-                <!-- Create button Event -->
-                <div class="flex items-center gap-x-2.5">
-                    <a
-                        href="{{ route('admin.events.create') }}"
-                        class="primary-button"
-                    >
-                        @lang('admin::app.events.index.create-btn')
-                    </a>
-                </div>
+                @if (bouncer()->hasPermission('events.create'))
+                    <div class="flex items-center gap-x-2.5">
+                        <a
+                            href="{{ route('admin.events.create') }}"
+                            class="primary-button"
+                        >
+                            @lang('admin::app.events.index.create-btn')
+                        </a>
+                    </div>
+                @endif
             </div>
         </div>
 

@@ -60,10 +60,10 @@ class UserController extends Controller
             'confirm_password' => 'nullable|required_with:password|same:password',
             'role_id' => 'required',
             'status' => 'boolean|in:0,1',
-            'view_permission' => 'string|in:global,group,individual',
         ]);
 
         $data = request()->all();
+        $data['view_permission'] = 'global';
 
         if (
             isset($data['password'])
@@ -116,10 +116,10 @@ class UserController extends Controller
             'confirm_password' => 'nullable|required_with:password|same:password',
             'role_id' => 'required|integer|exists:roles,id',
             'status' => 'nullable|boolean|in:0,1',
-            'view_permission' => 'required|string|in:global,group,individual',
         ]);
 
         $data = request()->all();
+        $data['view_permission'] = 'global';
 
         if (empty($data['password'])) {
             $data = Arr::except($data, ['password', 'confirm_password']);

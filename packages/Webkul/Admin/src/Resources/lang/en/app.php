@@ -2,50 +2,20 @@
 
 return [
     'acl' => [
-        'leads' => 'Leads',
-        'lead' => 'Lead',
-        'quotes' => 'Quotes',
-        'mail' => 'Mail',
-        'inbox' => 'Inbox',
-        'draft' => 'Draft',
-        'outbox' => 'Outbox',
-        'sent' => 'Sent',
-        'trash' => 'Trash',
-        'activities' => 'Activities',
-        'webhook' => 'Webhook',
-        'contacts' => 'Contacts',
-        'persons' => 'Persons',
-        'organizations' => 'Organizations',
-        'products' => 'Products',
         'settings' => 'Settings',
         'groups' => 'Groups',
         'roles' => 'Roles',
         'users' => 'Users',
         'user' => 'User',
-        'automation' => 'Automation',
-        'attributes' => 'Attributes',
-        'pipelines' => 'Pipelines',
-        'sources' => 'Sources',
-        'types' => 'Types',
-        'email-templates' => 'Email Templates',
-        'workflows' => 'Workflows',
-        'other-settings' => 'Other Settings',
-        'tags' => 'Tags',
         'configuration' => 'Configuration',
         'create' => 'Create',
         'edit' => 'Edit',
         'view' => 'View',
-        'print' => 'Print',
         'delete' => 'Delete',
-        'export' => 'Export',
-        'mass-delete' => 'Mass Delete',
-        'data-transfer' => 'Data Transfer',
-        'imports' => 'Imports',
-        'import' => 'Import',
-        'event' => 'Event',
-        'campaigns' => 'Campaigns',
-        'warehouses' => 'Warehouses',
-        'inventory' => 'Inventory',
+        'events' => 'Events',
+        'event-categories' => 'Event Categories',
+        'students' => 'Students',
+        'manage-subscriptions' => 'Manage Subscriptions',
     ],
 
     'users' => [
@@ -384,6 +354,10 @@ return [
                         'quotes' => 'Quotes',
                         'persons' => 'Persons',
                         'products' => 'Products',
+                        'students' => 'Students',
+                        'events' => 'Events',
+                        'settings' => 'Settings',
+                        'configurations' => 'Configurations',
                     ],
 
                     'explore-all-products' => 'Explore all Products',
@@ -394,6 +368,10 @@ return [
                     'explore-all-matching-leads' => 'Explore all leads matching ":query" (:count)',
                     'explore-all-matching-contacts' => 'Explore all contacts matching ":query" (:count)',
                     'explore-all-matching-quotes' => 'Explore all quotes matching ":query" (:count)',
+                    'explore-all-events' => 'Explore all Events',
+                    'explore-all-students' => 'Explore all Students',
+                    'explore-all-settings' => 'Explore all Settings',
+                    'explore-all-configurations' => 'Explore all Configurations',
                 ],
             ],
         ],
@@ -1512,7 +1490,7 @@ return [
                 'name' => 'Name',
                 'sort-order' => 'Sort order',
                 'type' => 'Type',
-                'status-active' => 'Active on storefront',
+                'status-active' => 'Active on site',
 
                 'static-heading' => 'Static content',
                 'static-help' => 'HTML and custom CSS for this locale. Scripts are stripped on save.',
@@ -1547,7 +1525,7 @@ return [
                 'footer-add-column' => 'Add column',
 
                 'services-heading' => 'Services / features',
-                'services-help' => 'Icon (CSS class from the storefront theme), title, and short description per item.',
+                'services-help' => 'Icon (CSS class from the site theme), title, and short description per item.',
                 'services-icon' => 'Icon class',
                 'services-title' => 'Title',
                 'services-description' => 'Description',
@@ -1609,8 +1587,8 @@ return [
                 ],
 
                 'portal' => [
-                    'info' => 'This footer replaces the default storefront footer on every page when status is active. Create only one per theme code.',
-                    'enabled' => 'Use portal footer on storefront',
+                    'info' => 'This footer replaces the default site footer on every page when status is active. Create only one per theme code.',
+                    'enabled' => 'Use portal footer on site',
                     'effects' => 'Effects',
                     'effect' => [
                         'orbs' => 'Gradient orbs',
@@ -2387,7 +2365,7 @@ return [
 
                 'design' => [
                     'title' => 'Design',
-                    'info' => 'Branding for the admin panel and the storefront are configured separately.',
+                    'info' => 'Branding for the admin panel and the public site are configured separately.',
 
                     'admin-logo' => [
                         'favicon' => 'Favicon',
@@ -2399,8 +2377,8 @@ return [
                     'shop-logo' => [
                         'favicon' => 'Favicon',
                         'logo-image' => 'Logo Image',
-                        'title' => 'Storefront',
-                        'title-info' => 'Logo, favicon, and theme colors for the public shop and customer-facing pages.',
+                        'title' => 'Site',
+                        'title-info' => 'Logo, favicon, and theme colors for the public site and customer-facing pages.',
                         'primary-color' => 'Primary color',
                         'accent-color' => 'Accent color (links & emphasis)',
                         'icon-color' => 'Icon color',
@@ -2409,7 +2387,7 @@ return [
                     ],
                     'events-page' => [
                         'title' => 'Events Page',
-                        'title-info' => 'Manage the heading and description shown on the shop events page.',
+                        'title-info' => 'Manage the heading and description shown on the site events page.',
                         'heading' => 'Heading',
                         'description' => 'Description',
                         'per-page' => 'Events per page',
@@ -2417,22 +2395,23 @@ return [
                 ],
 
                 'store' => [
-                    'title' => 'Store',
-                    'info' => 'Storefront settings separated from admin panel settings.',
+                    'title' => 'Site',
+                    'info' => 'Public site settings separated from admin panel settings.',
 
                     'shop-logo' => [
                         'favicon' => 'Favicon',
                         'logo-image' => 'Logo Image',
-                        'title' => 'Storefront',
-                        'title-info' => 'Logo, favicon, and theme colors for the public shop and customer-facing pages.',
+                        'title' => 'Site',
+                        'title-info' => 'Logo, favicon, and theme colors for the public site and customer-facing pages.',
                         'primary-color' => 'Primary color',
                         'accent-color' => 'Accent color (links & emphasis)',
                         'icon-color' => 'Icon color',
                         'badge-color' => 'Badge color',
+                        'header-middle-logo' => 'Additional logo',
                     ],
                     'events-page' => [
                         'title' => 'Events Page',
-                        'title-info' => 'Manage the heading and description shown on the shop events page.',
+                        'title-info' => 'Manage the heading and description shown on the site events page.',
                         'heading' => 'Heading',
                         'description' => 'Description',
                         'per-page' => 'Events per page',
@@ -2458,7 +2437,8 @@ return [
                         'field-back-portal' => 'Back to home text',
                     ],
                     'navigation' => [
-                        'title-info' => 'Show/hide tabs, rename them, and add custom tabs for the storefront header.',
+                        'title' => 'Site header navigation',
+                        'title-info' => 'Show/hide tabs, rename them, and add custom tabs for the site header.',
                         'show-home' => 'Show Home tab',
                         'home-label' => 'Home tab label',
                         'show-events' => 'Show Events tab',
@@ -2484,10 +2464,13 @@ return [
 
                     'menu' => [
                         'activities' => 'Activities',
+                        'categories' => 'Events categories tab',
                         'configuration' => 'Configuration',
                         'contacts' => 'Contacts',
                         'dashboard' => 'Dashboard',
                         'draft' => 'Draft',
+                        'events' => 'Events',
+                        'events-tab' => 'Events main tab',
                         'inbox' => 'Inbox',
                         'info' => 'We can configure the menu items name here.',
                         'leads' => 'Leads',
@@ -2499,6 +2482,7 @@ return [
                         'quotes' => 'Quotes',
                         'sent' => 'Sent',
                         'settings' => 'Settings',
+                        'students' => 'Students',
                         'title' => 'Menu Item Configurations',
                         'trash' => 'Trash',
                     ],
@@ -2507,6 +2491,18 @@ return [
                         'brand-color' => 'Brand Color',
                         'info' => 'We can change the menu items colors here.',
                         'title' => 'Menu Item Color Configurations',
+                    ],
+                ],
+
+                'university-api' => [
+                    'title' => 'University API',
+                    'info' => 'Configure the endpoint used to verify student credentials against the university system.',
+
+                    'endpoint-settings' => [
+                        'title' => 'Endpoint settings',
+                        'info' => 'Set the university verification URL that receives student card and password. The API response is expected to include success + profile fields (name, registration number, major, academic level).',
+                        'endpoint' => 'Verification endpoint URL',
+                        'endpoint-info' => 'Expected response keys (default mapping): success, data.full_name (name), data.student_id (registration number), data.major (major), data.level (academic level).',
                     ],
                 ],
             ],
@@ -2580,6 +2576,38 @@ return [
                 'total-quotations' => 'Total Quotations',
                 'total-persons' => 'Total Persons',
                 'total-organizations' => 'Total Organizations',
+            ],
+
+            'events-students-over-all' => [
+                'total-events' => 'Total Events',
+                'published-events' => 'Published Events',
+                'currently-available-events' => 'Currently Available Events',
+                'ending-soon-events' => 'Events Ending Soon',
+                'total-students' => 'Total Students',
+                'students-with-subscriptions' => 'Students With Subscriptions',
+                'total-subscriptions' => 'Total Subscriptions',
+            ],
+
+            'student-subscriptions-over-time' => [
+                'title' => 'Student Subscriptions Over Time',
+                'legend' => 'Subscriptions',
+            ],
+
+            'events-status-distribution' => [
+                'title' => 'Events Status Distribution',
+                'published' => 'Published',
+                'unpublished' => 'Unpublished',
+                'empty-title' => 'No Data Available',
+                'empty-info' => 'No data available for selected interval',
+            ],
+
+            'top-subscribed-events' => [
+                'title' => 'Top Subscribed Events',
+                'rank' => '#',
+                'event' => 'Event',
+                'subscriptions' => 'Subscriptions',
+                'empty-title' => 'No Subscriptions Yet',
+                'empty-info' => 'No subscriptions available for selected interval',
             ],
 
             'total-leads' => [
@@ -2684,6 +2712,7 @@ return [
         'tags' => 'Tags',
         'tags-info' => 'Add, edit or delete tags from CRM',
         'my-account' => 'My Account',
+        'visit-website' => 'Visit website',
         'sign-out' => 'Sign Out',
         'back' => 'Back',
         'name' => 'Name',
@@ -2814,13 +2843,15 @@ return [
             'title'           => 'Add Event',
             'save-btn'        => 'Save',
             'general'         => 'Basic Details',
+            'section-required' => 'Required information',
+            'section-content' => 'Content',
             'event-date'      => 'Event date',
             'event-end-date'  => 'Availability end date',
-            'event-end-date-hint' => 'Last day the event stays available (inclusive). Required when “Limit by end date” is on.',
+            'event-end-date-hint' => 'Last calendar day the event stays available (inclusive). Must be on or after the event date.',
             'organizer'       => 'Organizer',
             'organizer-placeholder' => 'Organizing unit or contact',
-            'availability-section' => 'Availability rules',
-            'availability-section-intro' => 'Choose what makes the event “available” on the shop. You can use seats, an end date, or both (all enabled rules must pass).',
+            'availability-section' => 'Seats & capacity',
+            'availability-section-intro' => 'Decide whether availability depends on remaining seats. Leave seats empty for unlimited capacity when the seat limit is turned off.',
             'availability-use-seats' => 'Limit by seat count',
             'availability-use-seats-hint' => 'When on, the event is unavailable if remaining seats are 0. Turn off if seats should not affect availability.',
             'availability-use-end-date' => 'Limit by end date',
@@ -2828,8 +2859,8 @@ return [
             'available-seats' => 'Available seats',
             'available-seats-placeholder' => 'Leave empty for no limit',
             'available-seats-hint' => 'Leave empty for open capacity. Use 0 for fully booked (when seat rule is enabled).',
-            'published'       => 'Published in shop',
-            'published-hint'  => 'Unpublished events never appear on the shop, regardless of availability rules.',
+            'published'       => 'Published on site',
+            'published-hint'  => 'Unpublished events never appear on the site, regardless of availability rules.',
             'name'            => 'Event Name',
             'placeholder-name'=> 'e.g. AI Workshop',
             'description'     => 'Description',
@@ -2867,6 +2898,85 @@ return [
         'edit' => [
             'title'           => 'Edit Event',
             'save-btn'        => 'Save Changes',
+        ],
+    ],
+
+    'students' => [
+        'title' => 'Students',
+        'create-success' => 'Student created successfully.',
+        'update-success' => 'Student updated successfully.',
+        'delete-success' => 'Student deleted successfully.',
+        'delete-failed' => 'Student deletion failed.',
+        'all-delete-success' => 'Selected students deleted successfully.',
+        'no-selection' => 'No students were selected.',
+
+        'index' => [
+            'title' => 'Students',
+            'create-btn' => 'Add Student',
+
+            'datagrid' => [
+                'id' => 'ID',
+                'name' => 'Name',
+                'university-card-number' => 'University Card Number',
+                'registration-number' => 'Registration Number',
+                'major' => 'Major',
+                'academic-level' => 'Academic Level',
+                'subscribed-events-count' => 'Subscribed Events',
+                'created-at' => 'Created At',
+                'view' => 'View',
+                'edit' => 'Edit',
+                'delete' => 'Delete',
+            ],
+        ],
+
+        'create' => [
+            'title' => 'Add Student',
+            'save-btn' => 'Save Student',
+        ],
+
+        'edit' => [
+            'title' => 'Edit Student',
+            'save-btn' => 'Save Changes',
+        ],
+
+        'view' => [
+            'title' => 'Student: :name',
+            'heading' => 'Student Details',
+            'edit-btn' => 'Edit Student',
+            'general-info' => 'General Information',
+        ],
+
+        'form' => [
+            'name' => 'Name',
+            'university-card-number' => 'University Card Number',
+            'registration-number' => 'Registration Number',
+            'major' => 'Major',
+            'academic-level' => 'Academic Level',
+            'password' => 'Password',
+            'password-confirmation' => 'Password Confirmation',
+            'profile-image' => 'Profile Image',
+        ],
+
+        'subscriptions' => [
+            'title' => 'Subscribed Events',
+            'select-event' => 'Select event',
+            'add-btn' => 'Add Subscription',
+            'remove-btn' => 'Remove',
+            'empty' => 'No subscriptions found for this student.',
+            'already-exists' => 'The student is already subscribed to this event.',
+            'not-found' => 'Subscription was not found.',
+            'event-unavailable' => 'Cannot subscribe student to this event because it is ended or unavailable.',
+            'create-success' => 'Subscription has been added successfully.',
+            'delete-success' => 'Subscription has been removed successfully.',
+            'published' => 'Published',
+            'unpublished' => 'Draft',
+
+            'columns' => [
+                'event' => 'Event',
+                'date' => 'Date',
+                'status' => 'Status',
+                'actions' => 'Actions',
+            ],
         ],
     ],
 

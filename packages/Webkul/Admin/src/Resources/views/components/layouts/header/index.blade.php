@@ -1,9 +1,9 @@
-<header class="sticky top-0 z-[10001] flex items-center justify-between gap-1 border-b border-gray-200 bg-white px-4 py-2.5 transition-all dark:border-gray-800 dark:bg-gray-900">  
+<header class="sticky top-0 z-[10001] flex items-center justify-between gap-1 border-b border-gray-200 bg-white px-4 py-2.5 transition-all dark:border-gray-800 dark:bg-gray-900">
     <!-- logo -->
     <div class="flex items-center gap-1.5">
         <!-- Sidebar Menu -->
         <x-admin::layouts.sidebar.mobile />
-        
+
         <a href="{{ route('admin.dashboard.index') }}">
             @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img
@@ -42,7 +42,19 @@
             <!-- Mega Search Bar -->
             @include('admin::components.layouts.header.mobile.mega-search')
         </div>
-        
+
+        <!-- Visit storefront (public site) -->
+        <a
+            href="{{ route('shop.home.index') }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="icon-forward p-1.5 rounded-md text-2xl cursor-pointer transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+            title="@lang('admin::app.layouts.visit-website')"
+            aria-label="@lang('admin::app.layouts.visit-website')"
+        >
+{{--            <span class="icon-forward"></span>--}}
+        </a>
+
         <!-- Dark mode -->
         <v-dark>
             <div class="flex">
@@ -56,7 +68,7 @@
             <!-- Quick Creation Bar -->
             @include('admin::components.layouts.header.quick-creation')
         </div>
-        
+
         <!-- Admin profile -->
         <x-admin::dropdown position="bottom-{{ in_array(app()->getLocale(), ['fa', 'ar']) ? 'left' : 'right' }}">
             <x-slot:toggle>
@@ -70,7 +82,7 @@
                         />
                     </button>
                 @else
-                    <button class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-pink-400 font-semibold leading-6 text-white">
+                    <button class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-brandColor font-semibold leading-6 text-white">
                         {{ substr($user->name, 0, 1) }}
                     </button>
                 @endif

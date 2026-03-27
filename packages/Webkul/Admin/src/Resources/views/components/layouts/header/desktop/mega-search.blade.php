@@ -45,98 +45,21 @@
                 </div>
 
                 <!-- Searched Results -->
-                <template v-if="activeTab == 'products'">
+                <template v-if="activeTab == 'events'">
                     <template v-if="isLoading">
                         <x-admin::shimmer.header.mega-search.products />
                     </template>
 
                     <template v-else>
                         <div class="grid max-h-[400px] overflow-y-auto">
-                            <template v-for="product in searchedResults.products">
+                            <template v-for="event in searchedResults.events">
                                 <a
-                                    :href="'{{ route('admin.products.view', ':id') }}'.replace(':id', product.id)"
+                                    :href="'{{ route('admin.events.edit', ':id') }}'.replace(':id', event.id)"
                                     class="flex cursor-pointer justify-between gap-2.5 border-b border-slate-300 p-4 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950"
                                 >
-                                    <!-- Left Information -->
-                                    <div class="flex gap-2.5">
-                                        <!-- Details -->
-                                        <div class="grid place-content-start gap-1.5">
-                                            <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
-                                                @{{ product.name }}
-                                            </p>
-
-                                            <p class="text-gray-500">
-                                                @{{ "@lang(':sku')".replace(':sku', product.sku) }}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Right Information -->
-                                    <div class="grid place-content-center gap-1 text-right">
-                                        <!-- Formatted Price -->
-                                        <p class="font-semibold text-gray-600 dark:text-gray-300">
-                                            @{{ $admin.formatPrice(product.price) }}
-                                        </p>
-                                    </div>
-                                </a>
-                            </template>
-
-                        </div>
-
-                        <div class="flex border-t p-3 dark:border-gray-800">
-                            <template v-if="searchedResults.products.length">
-                                <a
-                                    :href="'{{ route('admin.products.index') }}?search=:query'.replace(':query', searchTerm)"
-                                    class="cursor-pointer text-xs font-semibold text-brandColor transition-all hover:underline"
-                                >
-
-                                    @{{ `@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-products')`.replace(':query', searchTerm).replace(':count', searchedResults.products.length) }}
-                                </a>
-                            </template>
-
-                            <template v-else>
-                                <a
-                                    href="{{ route('admin.products.index') }}"
-                                    class="cursor-pointer text-xs font-semibold text-brandColor transition-all hover:underline"
-                                >
-                                    @lang('admin::app.components.layouts.header.mega-search.explore-all-products')
-                                </a>
-                            </template>
-                        </div>
-                    </template>
-                </template>
-
-                <template v-if="activeTab == 'leads'">
-                    <template v-if="isLoading">
-                        <x-admin::shimmer.header.mega-search.leads />
-                    </template>
-
-                    <template v-else>
-                        <div class="grid max-h-[400px] overflow-y-auto">
-                            <template v-for="lead in searchedResults.leads">
-                                <a
-                                    :href="'{{ route('admin.leads.view', ':id') }}'.replace(':id', lead.id)"
-                                    class="flex cursor-pointer justify-between gap-2.5 border-b border-slate-300 p-4 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950"
-                                >
-                                    <!-- Left Information -->
-                                    <div class="flex gap-2.5">
-                                        <!-- Details -->
-                                        <div class="grid place-content-start gap-1.5">
-                                            <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
-                                                @{{ lead.title }}
-                                            </p>
-
-                                            <p class="text-gray-500">
-                                                @{{ lead.description }}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Right Information -->
-                                    <div class="grid place-content-center gap-1 text-right">
-                                        <!-- Formatted Price -->
-                                        <p class="font-semibold text-gray-600 dark:text-gray-300">
-                                            @{{ $admin.formatPrice(lead.lead_value) }}
+                                    <div class="grid place-content-start gap-1.5">
+                                        <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
+                                            @{{ event.name }}
                                         </p>
                                     </div>
                                 </a>
@@ -144,123 +67,68 @@
                         </div>
 
                         <div class="flex border-t p-3 dark:border-gray-800">
-                            <template v-if="searchedResults.leads.length">
+                            <template v-if="searchedResults.events.length">
                                 <a
-                                    :href="'{{ route('admin.leads.index') }}?search=:query'.replace(':query', searchTerm)"
+                                    :href="'{{ route('admin.events.index') }}?search=:query'.replace(':query', searchTerm)"
                                     class="cursor-pointer text-xs font-semibold text-brandColor transition-all hover:underline"
                                 >
-                                    @{{ `@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-leads')`.replace(':query', searchTerm).replace(':count', searchedResults.leads.length) }}
+                                    @lang('admin::app.components.layouts.header.mega-search.explore-all-events')
                                 </a>
                             </template>
 
                             <template v-else>
                                 <a
-                                    href="{{ route('admin.leads.index') }}"
+                                    href="{{ route('admin.events.index') }}"
                                     class="cursor-pointer text-xs font-semibold text-brandColor transition-all hover:underline"
                                 >
-                                    @lang('admin::app.components.layouts.header.mega-search.explore-all-leads')
+                                    @lang('admin::app.components.layouts.header.mega-search.explore-all-events')
                                 </a>
                             </template>
                         </div>
                     </template>
                 </template>
 
-                <template v-if="activeTab == 'persons'">
+                <template v-if="activeTab == 'students'">
                     <template v-if="isLoading">
                         <x-admin::shimmer.header.mega-search.persons />
                     </template>
 
                     <template v-else>
                         <div class="grid max-h-[400px] overflow-y-auto">
-                            <template v-for="person in searchedResults.persons">
+                            <template v-for="student in searchedResults.students">
                                 <a
-                                    :href="'{{ route('admin.contacts.persons.view', ':id') }}'.replace(':id', person.id)"
+                                    :href="'{{ route('admin.students.view', ':id') }}'.replace(':id', student.id)"
                                     class="flex cursor-pointer justify-between gap-2.5 border-b border-slate-300 p-4 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950"
                                 >
-                                    <!-- Left Information -->
-                                    <div class="flex gap-2.5">
-                                        <!-- Details -->
-                                        <div class="grid place-content-start gap-1.5">
-                                            <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
-                                                @{{ person.name }}
-                                            </p>
+                                    <div class="grid place-content-start gap-1.5">
+                                        <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
+                                            @{{ student.name }}
+                                        </p>
 
-                                            <p class="text-gray-500">
-                                                @{{ person.emails.map((item) => `${item.value}(${item.label})`).join(', ') }}
-                                            </p>
-                                        </div>
+                                        <p class="text-gray-500">
+                                            @{{ student.university_card_number }}
+                                        </p>
                                     </div>
                                 </a>
                             </template>
                         </div>
 
                         <div class="flex border-t p-3 dark:border-gray-800">
-                            <template v-if="searchedResults.persons.length">
+                            <template v-if="searchedResults.students.length">
                                 <a
-                                    :href="'{{ route('admin.contacts.persons.index') }}?search=:query'.replace(':query', searchTerm)"
+                                    :href="'{{ route('admin.students.index') }}?search=:query'.replace(':query', searchTerm)"
                                     class="cursor-pointer text-xs font-semibold text-brandColor transition-all hover:underline"
                                 >
-                                    @{{ `@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-contacts')`.replace(':query', searchTerm).replace(':count', searchedResults.persons.length) }}
+                                    @lang('admin::app.components.layouts.header.mega-search.explore-all-students')
                                 </a>
                             </template>
 
                             <template v-else>
                                 <a
-                                    href="{{ route('admin.contacts.persons.index') }}"
+                                    href="{{ route('admin.students.index') }}"
                                     class="cursor-pointer text-xs font-semibold text-brandColor transition-all hover:underline"
                                 >
-                                    @lang('admin::app.components.layouts.header.mega-search.explore-all-contacts')
-                                </a>
-                            </template>
-                        </div>
-                    </template>
-                </template>
-
-                <template v-if="activeTab == 'quotes'">
-                    <template v-if="isLoading">
-                        <x-admin::shimmer.header.mega-search.quotes />
-                    </template>
-
-                    <template v-else>
-                        <div class="grid max-h-[400px] overflow-y-auto">
-                            <template v-for="quote in searchedResults.quotes">
-                                <a
-                                    :href="'{{ route('admin.quotes.edit', ':id') }}'.replace(':id', quote.id)"
-                                    class="flex cursor-pointer justify-between gap-2.5 border-b border-slate-300 p-4 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950"
-                                >
-                                    <!-- Left Information -->
-                                    <div class="flex gap-2.5">
-                                        <!-- Details -->
-                                        <div class="grid place-content-start gap-1.5">
-                                            <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
-                                                @{{ quote.subject }}
-                                            </p>
-
-                                            <p class="text-gray-500">
-                                                @{{ quote.description }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </template>
-                        </div>
-
-                        <div class="flex border-t p-3 dark:border-gray-800">
-                            <template v-if="searchedResults.quotes.length">
-                                <a
-                                    :href="'{{ route('admin.quotes.index') }}?search=:query'.replace(':query', searchTerm)"
-                                    class="cursor-pointer text-xs font-semibold text-brandColor transition-all hover:underline"
-                                >
-                                    @{{ `@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-quotes')`.replace(':query', searchTerm).replace(':count', searchedResults.quotes.length) }}
-                                </a>
-                            </template>
-
-                            <template v-else>
-                                <a
-                                    href="{{ route('admin.quotes.index') }}"
-                                    class="cursor-pointer text-xs font-semibold text-brandColor transition-all hover:underline"
-                                >
-                                    @lang('admin::app.components.layouts.header.mega-search.explore-all-quotes')
+                                    @lang('admin::app.components.layouts.header.mega-search.explore-all-students')
                                 </a>
                             </template>
                         </div>
@@ -352,106 +220,30 @@
 
             data() {
                 return  {
-                    activeTab: 'leads',
+                    activeTab: 'events',
 
                     isDropdownOpen: false,
 
                     tabs: {
-                        leads: {
-                            key: 'leads',
-                            title: "@lang('admin::app.components.layouts.header.mega-search.tabs.leads')",
-                            is_active: true,
-                            endpoint: "{{ route('admin.leads.search') }}",
-                            query_params: [
-                                {
-                                    search: 'title',
-                                    searchFields: 'title:like',
-                                },
-                                {
-                                    search: 'user.name',
-                                    searchFields: 'user.name:like',
-                                },
-                                {
-                                    search: 'person.name',
-                                    searchFields: 'person.name:like',
-                                },
-                            ],
+                        events: {
+                            key: 'events',
+                            title: "@lang('admin::app.components.layouts.header.mega-search.tabs.events')",
+                            is_active: false,
+                            endpoint: "{{ route('admin.events.search') }}",
+                            query: '',
                         },
 
-                        quotes: {
-                            key: 'quotes',
-                            title: "@lang('admin::app.components.layouts.header.mega-search.tabs.quotes')",
+                        students: {
+                            key: 'students',
+                            title: "@lang('admin::app.components.layouts.header.mega-search.tabs.students')",
                             is_active: false,
-                            endpoint: "{{ route('admin.quotes.search') }}",
-                            query_params: [
-                                {
-                                    search: 'subject',
-                                    searchFields: 'subject:like',
-                                },
-                                {
-                                    search: 'description',
-                                    searchFields: 'description:like',
-                                },
-                                {
-                                    search: 'user.name',
-                                    searchFields: 'user.name:like',
-                                },
-                                {
-                                    search: 'person.name',
-                                    searchFields: 'person.name:like',
-                                },
-                            ],
-                        },
-
-                        products: {
-                            key: 'products',
-                            title: "@lang('admin::app.components.layouts.header.mega-search.tabs.products')",
-                            is_active: false,
-                            endpoint: "{{ route('admin.products.search') }}",
-                            query_params: [
-                                {
-                                    search: 'name',
-                                    searchFields: 'name:like',
-                                },
-                                {
-                                    search: 'sku',
-                                    searchFields: 'sku:like',
-                                },
-                                {
-                                    search: 'description',
-                                    searchFields: 'description:like',
-                                },
-                            ],
-                        },
-
-                        persons: {
-                            key: 'persons',
-                            title: "@lang('admin::app.components.layouts.header.mega-search.tabs.persons')",
-                            is_active: false,
-                            endpoint: "{{ route('admin.contacts.persons.search') }}",
-                            query_params: [
-                                {
-                                    search: 'name',
-                                    searchFields: 'name:like',
-                                },
-                                {
-                                    search: 'job_title',
-                                    searchFields: 'job_title:like',
-                                },
-                                {
-                                    search: 'user.name',
-                                    searchFields: 'user.name:like',
-                                },
-                                {
-                                    search: 'organization.name',
-                                    searchFields: 'organization.name:like',
-                                },
-                            ],
+                            endpoint: "{{ route('admin.students.search') }}",
+                            query: '',
                         },
 
                         settings: {
                             key: 'settings',
-                            title: "@lang('Settings')",
+                            title: "@lang('admin::app.components.layouts.header.mega-search.tabs.settings')",
                             is_active: false,
                             endpoint: "{{ route('admin.settings.search') }}",
                             query: '',
@@ -459,7 +251,7 @@
 
                         configurations: {
                             key: 'configurations',
-                            title: "@lang('Configurations')",
+                            title: "@lang('admin::app.components.layouts.header.mega-search.tabs.configurations')",
                             is_active: false,
                             endpoint: "{{ route('admin.configuration.search') }}",
                             query: '',
@@ -471,12 +263,10 @@
                     searchTerm: '',
 
                     searchedResults: {
-                        leads: [],
-                        quotes: [],
-                        products: [],
-                        persons: [],
                         settings: [],
                         configurations: [],
+                        students: [],
+                        events: [],
                     },
 
                     params: {
@@ -547,6 +337,8 @@
                     if (
                         tab.key === 'settings'
                         || tab.key === 'configurations'
+                        || tab.key === 'students'
+                        || tab.key === 'events'
                     ) {
                         this.params = null;
 

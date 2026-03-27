@@ -130,20 +130,24 @@ class EventDataGrid extends DataGrid
 
     public function prepareActions(): void
     {
-        $this->addAction([
-            'index' => 'edit',
-            'icon' => 'icon-edit',
-            'title' => trans('admin::app.datagrid.edit'),
-            'method' => 'GET',
-            'url' => fn ($row) => route('admin.events.edit', $row->id),
-        ]);
+        if (bouncer()->hasPermission('events.edit')) {
+            $this->addAction([
+                'index' => 'edit',
+                'icon' => 'icon-edit',
+                'title' => trans('admin::app.datagrid.edit'),
+                'method' => 'GET',
+                'url' => fn ($row) => route('admin.events.edit', $row->id),
+            ]);
+        }
 
-        $this->addAction([
-            'index' => 'delete',
-            'icon' => 'icon-delete',
-            'title' => trans('admin::app.datagrid.delete'),
-            'url' => fn ($row) => route('admin.events.delete', $row->id),
-            'method' => 'DELETE',
-        ]);
+        if (bouncer()->hasPermission('events.delete')) {
+            $this->addAction([
+                'index' => 'delete',
+                'icon' => 'icon-delete',
+                'title' => trans('admin::app.datagrid.delete'),
+                'url' => fn ($row) => route('admin.events.delete', $row->id),
+                'method' => 'DELETE',
+            ]);
+        }
     }
 }

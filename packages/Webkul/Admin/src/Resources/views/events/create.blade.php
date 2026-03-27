@@ -42,6 +42,10 @@
                             @lang('admin::app.events.create.general')
                         </p>
 
+                        <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                            @lang('admin::app.events.create.section-required')
+                        </p>
+
                         <!-- Title -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
@@ -61,23 +65,47 @@
                             <x-admin::form.control-group.error control-name="title" />
                         </x-admin::form.control-group>
 
-                        <!-- Event date -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.events.create.event-date')
-                            </x-admin::form.control-group.label>
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            <!-- Event date -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.events.create.event-date')
+                                </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group.control
-                                type="date"
-                                id="event_date"
-                                name="event_date"
-                                rules="required"
-                                value="{{ old('event_date') }}"
-                                :label="trans('admin::app.events.create.event-date')"
-                            />
+                                <x-admin::form.control-group.control
+                                    type="date"
+                                    id="event_date"
+                                    name="event_date"
+                                    rules="required"
+                                    value="{{ old('event_date') }}"
+                                    :label="trans('admin::app.events.create.event-date')"
+                                />
 
-                            <x-admin::form.control-group.error control-name="event_date" />
-                        </x-admin::form.control-group>
+                                <x-admin::form.control-group.error control-name="event_date" />
+                            </x-admin::form.control-group>
+
+                            <!-- Availability end date -->
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.events.create.event-end-date')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="date"
+                                    id="event_end_date"
+                                    name="event_end_date"
+                                    value="{{ old('event_end_date') }}"
+                                    rules="required"
+                                    :label="trans('admin::app.events.create.event-end-date')"
+                                />
+
+                                <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">
+                                    @lang('admin::app.events.create.event-end-date-hint')
+                                </p>
+
+                                <x-admin::form.control-group.error control-name="event_end_date" />
+                            </x-admin::form.control-group>
+                        </div>
 
                         <!-- Organizer -->
                         <x-admin::form.control-group>
@@ -97,6 +125,10 @@
 
                             <x-admin::form.control-group.error control-name="organizer" />
                         </x-admin::form.control-group>
+
+                        <p class="mb-3 mt-6 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                            @lang('admin::app.events.create.section-content')
+                        </p>
 
                         <!-- Description -->
                         <x-admin::form.control-group class="!mb-0">
@@ -234,7 +266,7 @@
                                 <x-admin::form.control-group.error control-name="availability_use_seats" />
                             </x-admin::form.control-group>
 
-                            <x-admin::form.control-group>
+                            <x-admin::form.control-group class="!mb-0">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.events.create.available-seats')
                                 </x-admin::form.control-group.label>
@@ -255,27 +287,6 @@
                                 </p>
 
                                 <x-admin::form.control-group.error control-name="available_seats" />
-                            </x-admin::form.control-group>
-
-                            <x-admin::form.control-group class="!mb-0">
-                                <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.events.create.event-end-date')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="date"
-                                    id="event_end_date"
-                                    name="event_end_date"
-                                    value="{{ old('event_end_date') }}"
-                                    rules="required"
-                                    :label="trans('admin::app.events.create.event-end-date')"
-                                />
-
-                                <p class="mb-2 text-xs text-gray-600 dark:text-gray-400">
-                                    @lang('admin::app.events.create.event-end-date-hint')
-                                </p>
-
-                                <x-admin::form.control-group.error control-name="event_end_date" />
                             </x-admin::form.control-group>
                         </x-slot>
                     </x-admin::accordion>

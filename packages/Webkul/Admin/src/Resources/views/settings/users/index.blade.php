@@ -357,76 +357,15 @@
 
                                     <x-admin::form.control-group.error control-name="role_id" />
                                 </x-admin::form.control-group>
-
-                                <!-- Permission -->
-                                <x-admin::form.control-group class="flex-1">
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.users.index.create.view-permission')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="view_permission"
-                                        rules="required"
-                                        v-model="user.view_permission"
-                                        value="global"
-                                        :label="trans('admin::app.settings.users.index.create.view-permission')"
-                                    >
-                                        <!-- Default Option -->
-                                        <option  value="global" selected>
-                                            @lang('admin::app.settings.users.index.create.global')
-                                        </option>
-
-                                        <option value="group">
-                                            @lang('admin::app.settings.users.index.create.group')
-                                        </option>
-
-                                        <option value="individual">
-                                            @lang('admin::app.settings.users.index.create.individual')
-                                        </option>
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error control-name="view_permission" />
-                                </x-admin::form.control-group>
                             </div>
 
+                            <input
+                                type="hidden"
+                                name="view_permission"
+                                value="global"
+                            />
+
                             {!! view_render_event('admin.settings.users.index.form.role_id.after') !!}
-
-                            {!! view_render_event('admin.settings.users.index.form.role_id.before') !!}
-
-                            <template v-if="user.view_permission === 'group'">
-                                <!-- Group -->
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.users.index.create.group')
-                                    </x-admin::form.control-group.label>
-
-                                    <v-field
-                                        name="groups[]"
-                                        label="@lang('admin::app.settings.users.index.create.group')"
-                                        multiple
-                                        v-model="user.groups"
-                                        rules="required"
-                                    >
-                                        <select
-                                            name="groups[]"
-                                            class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                                            :class="[errors['groups[]'] ? 'border !border-red-600 hover:border-red-600' : '']"
-                                            multiple
-                                            v-model="user.groups"
-                                        >
-                                            <option
-                                                v-for="group in groups"
-                                                :value="group.id"
-                                                :text="group.name"
-                                            >
-                                            </option>
-                                        </select>
-                                    </v-field>
-
-                                    <x-admin::form.control-group.error name="groups[]" />
-                                </x-admin::form.control-group>
-                            </template>
 
                             {!! view_render_event('admin.settings.users.index.form.role_id.after') !!}
 
@@ -490,9 +429,7 @@
 
                         groups:  @json($groups),
 
-                        user: {
-                            view_permission: 'global',
-                        },
+                        user: {},
                     };
                 },
 

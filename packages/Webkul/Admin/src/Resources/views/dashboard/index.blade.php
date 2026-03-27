@@ -41,22 +41,9 @@
         {!! view_render_event('admin.dashboard.index.content.left.before') !!}
 
         <div class="flex flex-1 flex-col gap-4 max-xl:flex-auto">
-            <!-- Revenue Stats -->
-            @include('admin::dashboard.index.revenue')
+            @include('admin::dashboard.index.events-students-over-all')
 
-            <!-- Over All Stats -->
-            @include('admin::dashboard.index.over-all')
-
-            <!-- Total Leads Stats -->
-            @include('admin::dashboard.index.total-leads')
-
-            <div class="flex gap-4 max-lg:flex-wrap">
-                <!-- Total Products -->
-                @include('admin::dashboard.index.top-selling-products')
-
-                <!-- Total Persons -->
-                @include('admin::dashboard.index.top-persons')
-            </div>
+            @include('admin::dashboard.index.student-subscriptions-over-time')
         </div>
 
         {!! view_render_event('admin.dashboard.index.content.left.after') !!}
@@ -65,14 +52,9 @@
         {!! view_render_event('admin.dashboard.index.content.right.before') !!}
 
         <div class="flex w-[378px] max-w-full flex-col gap-4 max-sm:w-full">
-            <!-- Revenue by Types -->
-            @include('admin::dashboard.index.open-leads-by-states')
+            @include('admin::dashboard.index.events-status-distribution')
 
-            <!-- Revenue by Sources -->
-            @include('admin::dashboard.index.revenue-by-sources')
-
-            <!-- Revenue by Types -->
-            @include('admin::dashboard.index.revenue-by-types')
+            @include('admin::dashboard.index.top-subscribed-events')
         </div>
 
         {!! view_render_event('admin.dashboard.index.content.left.after') !!}
@@ -85,12 +67,6 @@
         <script
             type="module"
             src="{{ vite()->asset('js/chart.js') }}"
-        >
-        </script>
-
-        <script
-            type="module"
-            src="https://cdn.jsdelivr.net/npm/chartjs-chart-funnel@4.2.1/build/index.umd.min.js"
         >
         </script>
 

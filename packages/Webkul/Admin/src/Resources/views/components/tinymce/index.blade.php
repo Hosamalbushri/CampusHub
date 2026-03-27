@@ -1,4 +1,4 @@
-@php($placeholders = app('\Webkul\Automation\Helpers\Entity')->getEmailTemplatePlaceholders())
+@php($placeholders = [])
 
 <v-tinymce {{ $attributes }}></v-tinymce>
 

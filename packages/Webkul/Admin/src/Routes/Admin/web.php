@@ -6,39 +6,9 @@
 require 'auth-routes.php';
 
 /**
- * Leads routes.
- */
-require 'leads-routes.php';
-
-/**
- * Email routes.
- */
-require 'mail-routes.php';
-
-/**
- * Settings routes.
+ * Settings routes (minimal).
  */
 require 'settings-routes.php';
-
-/**
- * Products routes.
- */
-require 'products-routes.php';
-
-/**
- * Contacts routes.
- */
-require 'contacts-routes.php';
-
-/**
- * Activities routes.
- */
-require 'activities-routes.php';
-
-/**
- * Quotes routes.
- */
-require 'quote-routes.php';
 
 /**
  * Configuration routes.
@@ -54,3 +24,8 @@ require 'rest-routes.php';
  * Events routes.
  */
 require 'events-routes.php';
+
+/**
+ * Students routes.
+ */
+require 'students-routes.php';

@@ -62,12 +62,6 @@
             </div>
         </div>
 
-        <!-- Powered By -->
-        <div class="text-sm font-normal">
-            @lang('admin::app.components.layouts.powered-by.description', [
-                'krayin' => '<a class="text-[color:var(--shop-accent)] hover:underline" href="https://krayincrm.com/">Krayin</a>',
-                'webkul' => '<a class="text-[color:var(--shop-accent)] hover:underline" href="https://webkul.com/">Webkul</a>',
-            ])
-        </div>
+        @include('admin::sessions.partials.footer-credits')
     </div>
 </x-admin::layouts.anonymous>

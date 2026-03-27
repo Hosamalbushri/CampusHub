@@ -200,22 +200,49 @@ class ItemField
     /**
      * Get name field for forms in configuration page.
      *
-     * @param  string  $key
+     * Field names may contain dots (e.g. events.event). Splitting the full key on every
+     * dot nests those under the parent (menu[events][event]), which collides with another
+     * field whose name is the parent segment (menu[events]) and drops the parent value on POST.
+     * Only the item_key path is split; the field name stays one bracket segment.
+     *
+     * @param  string|null  $key
      * @return string
      */
     public function getNameField($key = null)
     {
-        if (! $key) {
-            $key = $this->item_key.'.'.$this->name;
+        if ($key === null) {
+            return $this->bracketConfigFieldName($this->item_key, $this->name);
+        }
+
+        if (str_starts_with($key, $this->item_key.'.')) {
+            $fieldName = substr($key, strlen($this->item_key) + 1);
+
+            return $this->bracketConfigFieldName($this->item_key, $fieldName);
         }
 
         $nameField = '';
 
-        foreach (explode('.', $key) as $key => $field) {
-            $nameField .= $key === 0 ? $field : '['.$field.']';
+        foreach (explode('.', $key) as $index => $field) {
+            $nameField .= $index === 0 ? $field : '['.$field.']';
         }
 
         return $nameField;
+    }
+
+    /**
+     * Build general[settings][menu][field.name] so dotted field names do not nest under a sibling key.
+     */
+    private function bracketConfigFieldName(string $itemKey, string $fieldName): string
+    {
+        $parts = explode('.', $itemKey);
+
+        $nameField = $parts[0];
+
+        for ($i = 1; $i < count($parts); $i++) {
+            $nameField .= '['.$parts[$i].']';
+        }
+
+        return $nameField.'['.$fieldName.']';
     }
 
     /**

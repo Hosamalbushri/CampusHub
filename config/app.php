@@ -106,12 +106,7 @@ return [
 
     'available_locales' => [
         'ar' => 'Arabic',
-        'en' => 'English',
-        'es' => 'Español',
-        'fa' => 'Persian',
-        'pt_BR' => 'Portuguese',
-        'tr' => 'Türkçe',
-        'vi' => 'Vietnamese',
+        'en' => 'English'
     ],
 
     /*
