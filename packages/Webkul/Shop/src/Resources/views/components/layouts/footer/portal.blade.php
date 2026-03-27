@@ -76,7 +76,7 @@
 
 {{-- footer: overflow visible so fixed back-to-top is not clipped --}}
 <footer
-    class="pf-root relative isolate mt-9 w-full"
+    class="pf-root relative mt-9 w-full"
     id="{{ $uid }}"
     role="contentinfo"
     data-pf-parallax="{{ $parallaxOn ? '1' : '0' }}"
@@ -334,7 +334,7 @@
             position: fixed;
             bottom: 1.5rem;
             inset-inline-start: 1.5rem;
-            z-index: 60;
+            z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
