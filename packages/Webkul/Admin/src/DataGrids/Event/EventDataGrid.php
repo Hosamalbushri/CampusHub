@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids\Event;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Webkul\DataGrid\DataGrid;
 
 class EventDataGrid extends DataGrid
@@ -21,17 +22,32 @@ class EventDataGrid extends DataGrid
         $queryBuilder = DB::table('events')
             ->leftJoinSub($categoryNamesSub, 'event_cat_names', function ($join) {
                 $join->on('events.id', '=', 'event_cat_names.event_id');
-            })
-            ->select(
-                'events.id',
-                'events.title',
-                'events.event_date',
-                'events.event_end_date',
-                'events.organizer',
-                'events.available_seats',
-                'events.status',
-                'event_cat_names.category_name'
-            );
+            });
+
+        if (Schema::hasTable('event_student')) {
+            $subscriberCountsSub = DB::table('event_student')
+                ->select('event_id', DB::raw('COUNT(*) as subscribers_count'))
+                ->groupBy('event_id');
+
+            $queryBuilder
+                ->leftJoinSub($subscriberCountsSub, 'event_subscriber_counts', function ($join) {
+                    $join->on('events.id', '=', 'event_subscriber_counts.event_id');
+                })
+                ->addSelect(DB::raw('COALESCE(event_subscriber_counts.subscribers_count, 0) as subscribers_count'));
+        } else {
+            $queryBuilder->addSelect(DB::raw('0 as subscribers_count'));
+        }
+
+        $queryBuilder->addSelect(
+            'events.id',
+            'events.title',
+            'events.event_date',
+            'events.event_end_date',
+            'events.organizer',
+            'events.available_seats',
+            'events.status',
+            'event_cat_names.category_name'
+        );
 
         $this->addFilter('id', 'events.id');
         $this->addFilter('title', 'events.title');
@@ -113,6 +129,16 @@ class EventDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'closure' => fn ($row) => $row->category_name ?: '—',
+        ]);
+
+        $this->addColumn([
+            'index' => 'subscribers_count',
+            'label' => trans('admin::app.events.index.datagrid.subscribers-count'),
+            'type' => 'integer',
+            'sortable' => true,
+            'searchable' => false,
+            'filterable' => false,
+            'closure' => fn ($row) => (string) ((int) ($row->subscribers_count ?? 0)),
         ]);
 
         $this->addColumn([

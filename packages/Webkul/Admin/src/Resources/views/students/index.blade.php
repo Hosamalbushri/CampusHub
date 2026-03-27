@@ -24,6 +24,10 @@
         </div>
 
         <x-admin::datagrid :src="route('admin.students.index')">
+            <x-slot:toolbar-right-before>
+                <x-admin::datagrid.export :src="route('admin.students.index')" />
+            </x-slot>
+
             <x-admin::shimmer.datagrid />
         </x-admin::datagrid>
     </div>

@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Events;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Webkul\Admin\DataGrids\Event\EventDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Event\Models\Event;
@@ -18,7 +19,7 @@ class EventController extends Controller
     ) {
     }
 
-    public function index(): View|JsonResponse
+    public function index(): View|JsonResponse|BinaryFileResponse
     {
         if (request()->ajax()) {
             return datagrid(EventDataGrid::class)->process();

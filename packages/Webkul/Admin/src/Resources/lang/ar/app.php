@@ -1347,7 +1347,7 @@ return [
                 'category_carousel' => 'تصنيفات الفعاليات',
                 'footer_links' => 'روابط تذييل',
                 'services_content' => 'شريط الخدمات',
-                'immersive_hero' => 'بطل غامر',
+                'immersive_hero' => 'الهيرو',
                 'portal_footer' => 'تذييل الموقع (كل الصفحات)',
                 'product_carousel' => 'عرض منتجات (قديم)',
             ],
@@ -2366,7 +2366,7 @@ return [
     ],
     'dashboard' => [
         'index' => [
-            'title' => 'لوحة القيادة',
+            'title' => 'لوحة التحكم',
             'start-date' => 'Start Date',
             'end-date' => 'End Date',
             'revenue' => [
@@ -2449,7 +2449,7 @@ return [
     ],
     'layouts' => [
         'app-version' => 'الإصدار: :version',
-        'dashboard' => 'لوحة القيادة',
+        'dashboard' => 'لوحة التحكم',
         'leads' => 'طلبات التسجيل',
         'quotes' => 'العروض',
         'quote' => 'عرض',
@@ -2618,6 +2618,7 @@ return [
                 'available_seats-unlimited' => 'بدون حد',
                 'description'   => 'الوصف',
                 'category_name' => 'القسم',
+                'subscribers-count' => 'عدد المشتركين',
                 'published'     => 'النشر',
                 'published-yes' => 'منشور',
                 'published-no'  => 'مسودة',

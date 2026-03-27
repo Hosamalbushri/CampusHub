@@ -1,6 +1,6 @@
 <v-datagrid-export {{ $attributes }}>
-    <div class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
-        <span class="icon-export text-xl text-gray-600"></span>
+    <div class="secondary-button">
+        <span class="icon-export text-xl"></span>
 
         @lang('admin::app.export.export')
     </div>
@@ -14,8 +14,11 @@
         <div>
             <x-admin::modal ref="exportModal">
                 <x-slot:toggle>
-                    <button class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
-                        <span class="icon-export text-xl text-gray-600"></span>
+                    <button
+                        type="button"
+                        class="secondary-button"
+                    >
+                        <span class="icon-export text-xl"></span>
 
                         @lang('admin::app.export.export')
                     </button>
@@ -112,7 +115,10 @@
                  * @returns {void}
                  */
                 download() {
-                    if (! this.available?.records?.length) {
+                    const total = this.available?.meta?.total ?? 0;
+                    const hasRows = total > 0 || (this.available?.records?.length ?? 0) > 0;
+
+                    if (! hasRows) {
                         this.$emitter.emit('add-flash', { type: 'warning', message: '@lang('admin::app.export.no-records')' });
 
                         this.$refs.exportModal.toggle();

@@ -2833,6 +2833,7 @@ return [
                 'available_seats-unlimited' => 'Unlimited',
                 'description'   => 'Description',
                 'category_name' => 'Category',
+                'subscribers-count' => 'Subscribers',
                 'published'     => 'Published',
                 'published-yes' => 'Published',
                 'published-no'  => 'Draft',

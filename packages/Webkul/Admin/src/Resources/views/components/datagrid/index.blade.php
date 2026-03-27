@@ -274,6 +274,15 @@
                             this.available.meta = meta;
 
                             this.isLoading = false;
+
+                            /**
+                             * Toolbar replaces itself with a shimmer while loading, so v-datagrid-export
+                             * is unmounted during the request. change-datagrid may fire from the records
+                             * watcher before the export button exists; re-emit after the toolbar is back.
+                             */
+                            this.$nextTick(() => {
+                                this.updateExportComponent();
+                            });
                         });
                 },
 

@@ -30,6 +30,10 @@
         </div>
 
         <x-admin::datagrid :src="route('admin.events.index')">
+            <x-slot:toolbar-right-before>
+                <x-admin::datagrid.export :src="route('admin.events.index')" />
+            </x-slot>
+
             <!-- DataGrid Shimmer -->
             <x-admin::shimmer.datagrid />
         </x-admin::datagrid>
