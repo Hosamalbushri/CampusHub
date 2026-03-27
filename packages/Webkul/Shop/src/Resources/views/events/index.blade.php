@@ -48,8 +48,8 @@
 
         <div class="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div class="max-w-3xl text-center lg:text-start">
-                <span class="mb-3 inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/70 px-4 py-1.5 text-xs font-bold text-violet-700 shadow-sm backdrop-blur">
-                    <i class="fas fa-calendar-alt text-[11px]" aria-hidden="true"></i>
+                <span class="mb-3 inline-flex items-center gap-2 rounded-full border border-[color:var(--shop-primary)]/30 bg-white/80 px-4 py-1.5 text-xs font-bold text-[color:var(--shop-primary)] shadow-sm backdrop-blur">
+                    <i class="fas fa-calendar-alt text-[11px] text-[color:var(--shop-icon-color)]" aria-hidden="true"></i>
                     {{ __('shop::app.events.index.title') }}
                 </span>
 
@@ -66,14 +66,14 @@
             <div class="flex flex-wrap items-center justify-center gap-2 lg:justify-end">
                 <label
                     for="events-filters-toggle"
-                    class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-105"
+                    class="inline-flex items-center gap-2 rounded-xl bg-[color:var(--shop-primary)] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[color:var(--shop-accent)] hover:brightness-[1.02]"
                 >
                     <i class="fas fa-sliders-h text-xs" aria-hidden="true"></i>
                     {{ __('shop::app.events.index.filters.button') }}
                 </label>
 
-                <span class="inline-flex items-center gap-2 rounded-xl border border-violet-200/80 bg-white px-3.5 py-2 text-sm font-semibold text-slate-700">
-                    <i class="fas fa-layer-group text-violet-500 text-xs" aria-hidden="true"></i>
+                <span class="inline-flex items-center gap-2 rounded-xl border border-[color:var(--shop-primary)]/30 bg-white px-3.5 py-2 text-sm font-semibold text-[color:var(--shop-primary)]">
+                    <i class="fas fa-layer-group text-[color:var(--shop-icon-color)] text-xs" aria-hidden="true"></i>
                     {{ $events->total() }} {{ __('shop::app.events.index.title') }}
                 </span>
             </div>
@@ -103,9 +103,9 @@
 
                     <a
                         href="{{ route('shop.events.index', $allCategoriesQuery) }}"
-                        class="{{ $activeCategoryId === 0 ? 'events-tab-active border-violet-200 bg-gradient-to-r from-violet-50 to-indigo-50 text-violet-700 shadow-[0_12px_30px_-20px_rgba(99,102,241,0.8)]' : 'border-slate-200 bg-white text-slate-700 hover:-translate-y-0.5 hover:border-violet-200 hover:bg-violet-50/60 hover:text-violet-700' }} group inline-flex min-w-[176px] shrink-0 items-center gap-3 rounded-xl border px-3 py-2.5 text-sm font-semibold transition duration-200"
+                        class="{{ $activeCategoryId === 0 ? 'events-tab-active border-[color:var(--shop-primary)]/35 bg-[color:var(--shop-badge-color)]/15 text-[color:var(--shop-primary)] shadow-[0_12px_30px_-20px_color-mix(in_srgb,var(--shop-primary)_45%,transparent)] hover:border-[color:var(--shop-primary)]/55 hover:bg-[color:var(--shop-badge-color)]/25 hover:text-[color:var(--shop-primary)]' : 'border-slate-200 bg-white text-slate-700 hover:border-[color:var(--shop-primary)]/40 hover:bg-[color:var(--shop-badge-color)]/10 hover:text-[color:var(--shop-primary)]' }} group inline-flex min-w-[176px] shrink-0 items-center gap-3 rounded-xl border px-3 py-2.5 text-sm font-semibold transition duration-200"
                     >
-                        <span class="{{ $activeCategoryId === 0 ? 'bg-gradient-to-br from-violet-600 to-indigo-500 text-white' : 'bg-slate-100 text-slate-600 group-hover:bg-violet-100 group-hover:text-violet-700' }} inline-flex h-9 w-9 items-center justify-center rounded-lg text-[11px] font-bold transition">
+                        <span class="{{ $activeCategoryId === 0 ? 'bg-[color:var(--shop-primary)] text-white group-hover:bg-[color:var(--shop-accent)]' : 'bg-slate-100 text-slate-600 group-hover:bg-[color:var(--shop-badge-color)]/20 group-hover:text-[color:var(--shop-icon-color)]' }} inline-flex h-9 w-9 items-center justify-center rounded-lg text-[11px] font-bold transition">
                             {{ __('shop::app.events.index.filters.all-short') }}
                         </span>
                         <span class="line-clamp-1">{{ __('shop::app.events.index.filters.all-categories') }}</span>
@@ -118,9 +118,9 @@
                         @endphp
                         <a
                             href="{{ route('shop.events.index', array_merge($currentQuery, ['category' => $category->id])) }}"
-                            class="{{ $activeCategoryId === (int) $category->id ? 'events-tab-active border-violet-200 bg-gradient-to-r from-violet-50 to-indigo-50 text-violet-700 shadow-[0_12px_30px_-20px_rgba(99,102,241,0.8)]' : 'border-slate-200 bg-white text-slate-700 hover:-translate-y-0.5 hover:border-violet-200 hover:bg-violet-50/60 hover:text-violet-700' }} group inline-flex min-w-[176px] shrink-0 items-center gap-3 rounded-xl border px-3 py-2.5 text-sm font-semibold transition duration-200"
+                            class="{{ $activeCategoryId === (int) $category->id ? 'events-tab-active border-[color:var(--shop-primary)]/35 bg-[color:var(--shop-badge-color)]/15 text-[color:var(--shop-primary)] shadow-[0_12px_30px_-20px_color-mix(in_srgb,var(--shop-primary)_45%,transparent)] hover:border-[color:var(--shop-primary)]/55 hover:bg-[color:var(--shop-badge-color)]/25 hover:text-[color:var(--shop-primary)]' : 'border-slate-200 bg-white text-slate-700 hover:border-[color:var(--shop-primary)]/40 hover:bg-[color:var(--shop-badge-color)]/10 hover:text-[color:var(--shop-primary)]' }} group inline-flex min-w-[176px] shrink-0 items-center gap-3 rounded-xl border px-3 py-2.5 text-sm font-semibold transition duration-200"
                         >
-                            <span class="{{ $activeCategoryId === (int) $category->id ? 'bg-gradient-to-br from-violet-600 to-indigo-500 text-white' : 'bg-slate-100 text-slate-600 group-hover:bg-violet-100 group-hover:text-violet-700' }} inline-flex h-9 w-9 items-center justify-center rounded-lg text-xs font-bold transition">
+                            <span class="{{ $activeCategoryId === (int) $category->id ? 'bg-[color:var(--shop-primary)] text-white group-hover:bg-[color:var(--shop-accent)]' : 'bg-slate-100 text-slate-600 group-hover:bg-[color:var(--shop-badge-color)]/20 group-hover:text-[color:var(--shop-icon-color)]' }} inline-flex h-9 w-9 items-center justify-center rounded-lg text-xs font-bold transition">
                                 {{ $categoryInitial }}
                             </span>
                             <span class="line-clamp-1">{{ $category->name }}</span>

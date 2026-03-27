@@ -80,7 +80,7 @@
     @pushOnce('styles', 'shop-event-details-design-styles')
         <style id="shop-event-details-design-styles">
             .shop-event-details-page {
-                background: linear-gradient(135deg, #f5f7fa 0%, #eef2f7 100%);
+                background: color-mix(in srgb, var(--shop-badge-color) 8%, #f5f7fa);
                 min-height: 100vh;
                 padding: 48px 0 72px;
             }
@@ -137,7 +137,7 @@
                 transition: transform .2s ease, background .2s ease, border-color .2s ease;
             }
             .shop-event-slide-btn:hover {
-                background: rgba(139, 92, 246, 0.60);
+                background: color-mix(in srgb, var(--shop-primary) 60%, transparent);
                 border-color: rgba(255, 255, 255, 0.40);
                 transform: translateY(-50%) scale(1.03);
             }
@@ -159,7 +159,7 @@
                 position: absolute;
                 top: 20px;
                 right: 20px;
-                background: linear-gradient(135deg, #8b5cf6, #6366f1);
+                background: var(--shop-primary);
                 padding: 8px 16px;
                 border-radius: 50px;
                 color: white;
@@ -186,7 +186,7 @@
 
             .shop-event-category-pill {
                 pointer-events: none;
-                background: linear-gradient(135deg, #8b5cf6, #6366f1);
+                background: var(--shop-badge-color);
                 padding: 7px 14px;
                 border-radius: 999px;
                 color: white;
@@ -194,7 +194,6 @@
                 font-weight: 800;
                 display: inline-flex;
                 align-items: center;
-                gap: 8px;
                 box-shadow: 0 8px 22px rgba(17, 24, 39, 0.12);
                 max-width: 100%;
             }
@@ -230,7 +229,7 @@
                 transition: border-color .2s ease, transform .2s ease;
             }
             .shop-event-thumb:hover { border-color: var(--shop-accent); transform: translateY(-2px); }
-            .shop-event-thumb--active { border-color: #8b5cf6; }
+            .shop-event-thumb--active { border-color: var(--shop-primary); }
             .shop-event-thumb img {
                 height: 64px;
                 width: 92px;
@@ -262,7 +261,7 @@
                 color: #6b7280;
                 font-size: 14px;
             }
-            .shop-event-stat i { color: #8b5cf6; width: 18px; text-align: center; }
+            .shop-event-stat i { color: var(--shop-icon-color); width: 18px; text-align: center; }
 
             .shop-event-price-tag {
                 background: #f3f4f6;
@@ -282,7 +281,7 @@
                 align-items: center;
                 gap: 10px;
             }
-            .shop-event-section-title i { color: #8b5cf6; }
+            .shop-event-section-title i { color: var(--shop-icon-color); }
 
             .shop-event-description {
                 color: #6b7280;
@@ -312,7 +311,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                color: #8b5cf6;
+                color: var(--shop-icon-color);
                 border: 1px solid #f1f1f1;
             }
             .shop-event-detail-info h4 {
@@ -338,7 +337,7 @@
             .shop-event-organizer-avatar {
                 width: 62px;
                 height: 62px;
-                background: linear-gradient(135deg, #8b5cf6, #6366f1);
+                background: var(--shop-primary);
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
@@ -381,7 +380,7 @@
             .shop-event-cta-number {
                 font-size: 1.8rem;
                 font-weight: 950;
-                color: #8b5cf6;
+                color: var(--shop-primary);
                 line-height: 1;
             }
             .shop-event-cta-text {
@@ -402,7 +401,7 @@
             }
             .shop-event-cta-fill {
                 height: 100%;
-                background: linear-gradient(135deg, #8b5cf6, #6366f1);
+                background: var(--shop-primary);
                 border-radius: 999px;
             }
             .shop-event-cta-action {
@@ -418,13 +417,13 @@
                 border: none;
                 cursor: pointer;
                 transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
-                background: linear-gradient(135deg, #8b5cf6, #6366f1);
+                background: var(--shop-primary);
                 color: #fff;
                 white-space: nowrap;
             }
             .shop-event-cta-action:hover:not(:disabled) {
                 transform: translateY(-2px);
-                box-shadow: 0 10px 25px rgba(99,102,241,0.28);
+                box-shadow: 0 10px 25px color-mix(in srgb, var(--shop-primary) 30%, transparent);
             }
             .shop-event-cta-action:disabled {
                 cursor: not-allowed;
@@ -442,7 +441,7 @@
                 font-size: 15px;
                 border: 1px solid #e5e7eb;
                 background: #fff;
-                color: #8b5cf6;
+                color: var(--shop-primary);
                 white-space: nowrap;
             }
 
@@ -478,19 +477,19 @@
                 align-items: center;
                 gap: 10px;
                 padding: 10px 14px;
-                border-radius: 999px;
+                border-radius: 12px;
                 font-weight: 950;
-                color: #7c3aed;
-                background: rgba(139, 92, 246, 0.10);
-                border: 1px solid rgba(139, 92, 246, 0.18);
+                color: #fff;
+                background: var(--shop-primary);
+                border: 1px solid var(--shop-primary);
                 text-decoration: none;
-                transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+                transition: box-shadow .2s ease, background .2s ease, border-color .2s ease;
                 white-space: nowrap;
             }
             .shop-suggested-viewall:hover {
-                transform: translateY(-1px);
-                box-shadow: 0 10px 25px rgba(99,102,241,0.14);
-                background: rgba(139, 92, 246, 0.14);
+                box-shadow: 0 10px 25px color-mix(in srgb, var(--shop-primary) 20%, transparent);
+                background: var(--shop-accent);
+                border-color: var(--shop-accent);
             }
 
             .shop-suggested-grid {
@@ -514,7 +513,7 @@
             .shop-suggested-card:hover {
                 transform: translateY(-5px);
                 box-shadow: 0 15px 30px rgba(0,0,0,0.10);
-                border-color: #8b5cf6;
+                border-color: var(--shop-primary);
             }
 
             .shop-suggested-image {
@@ -536,7 +535,7 @@
                 content: "";
                 position: absolute;
                 inset: 0;
-                background: linear-gradient(135deg, rgba(139,92,246,0.18), rgba(99,102,241,0.12));
+                background: color-mix(in srgb, var(--shop-badge-color) 18%, transparent);
                 opacity: 0;
                 transition: opacity .25s ease;
                 pointer-events: none;
@@ -548,7 +547,7 @@
                 position: absolute;
                 top: 12px;
                 right: 12px;
-                background: linear-gradient(135deg, #8b5cf6, #6366f1);
+                background: var(--shop-badge-color);
                 padding: 6px 12px;
                 border-radius: 50px;
                 font-size: 11px;
@@ -556,7 +555,6 @@
                 font-weight: 900;
                 display: inline-flex;
                 align-items: center;
-                gap: 8px;
             }
 
             .shop-suggested-content { padding: 16px; }
@@ -583,7 +581,7 @@
             .shop-suggested-price {
                 font-size: 13px;
                 font-weight: 900;
-                color: #8b5cf6;
+                color: var(--shop-primary);
             }
             .shop-suggested-price span { color: inherit; }
 
@@ -605,9 +603,9 @@
                 border-radius: 999px;
                 font-weight: 950;
                 font-size: 13px;
-                background: linear-gradient(135deg, #8b5cf6, #6366f1);
+                background: var(--shop-primary);
                 color: #fff;
-                box-shadow: 0 10px 25px rgba(99,102,241,0.14);
+                box-shadow: 0 10px 25px color-mix(in srgb, var(--shop-primary) 20%, transparent);
                 width: 100%;
                 text-decoration: none;
                 transition: transform .2s ease, box-shadow .2s ease;
@@ -615,7 +613,7 @@
 
             .shop-suggested-card:hover .shop-suggested-cta {
                 transform: translateY(-1px);
-                box-shadow: 0 14px 28px rgba(99,102,241,0.18);
+                box-shadow: 0 14px 28px color-mix(in srgb, var(--shop-primary) 24%, transparent);
             }
 
             @media (max-width: 640px) {
@@ -795,7 +793,6 @@
                                             @php $catName = trim((string) ($cat->name ?? '')); @endphp
                                             @if ($catName !== '')
                                                 <div class="shop-event-category-pill">
-                                                    <i class="fas fa-tag" aria-hidden="true"></i>
                                                     <span>{{ $catName }}</span>
                                                 </div>
                                             @endif
@@ -805,7 +802,7 @@
                             </div>
                         @else
                             <div class="shop-event-image">
-                                <div class="h-full w-full bg-gradient-to-br from-[color:var(--shop-surface-strong)] via-[color:var(--shop-surface)] to-[color:var(--shop-surface-strong)] flex items-center justify-center text-[color:var(--shop-placeholder)]">
+                                <div class="h-full w-full bg-[color:var(--shop-surface)] flex items-center justify-center text-[color:var(--shop-placeholder)]">
                                     <span class="text-sm font-semibold">{{ __('shop::app.events.card.no-image') }}</span>
                                 </div>
                             </div>
@@ -878,7 +875,6 @@
                                         data-event-url="{{ e($detailUrl) }}"
                                         @if (! $canSubscribe) disabled aria-disabled="true" @endif
                                     >
-                                        <i class="fas fa-ticket-alt" aria-hidden="true"></i>
                                         {{ $canSubscribe ? __('shop::app.events.card.subscribe') : __('shop::app.events.card.subscribe-unavailable') }}
                                     </button>
                                 @endif
@@ -973,10 +969,7 @@
                 <section class="shop-suggested-section">
                     <div class="shop-suggested-header">
                         <div>
-                            <h2>
-                                <i class="fas fa-lightbulb" aria-hidden="true"></i>
-                                {{ __('shop::app.events.show.suggestions-title') }}
-                            </h2>
+                            <h2>{{ __('shop::app.events.show.suggestions-title') }}</h2>
                             <div class="shop-suggested-subtitle">
                                 {{ __('shop::app.events.show.suggestions-subtitle') }}
                             </div>
@@ -986,76 +979,21 @@
                             class="shop-suggested-viewall"
                         >
                             {{ __('shop::app.events.show.view-all') }}
-                            <i class="fas fa-arrow-left" aria-hidden="true"></i>
                         </a>
                     </div>
 
-                    <div class="shop-suggested-grid">
+                    <ul class="shop-suggested-grid">
                         @foreach ($suggestedEvents as $sEvent)
-                            @php
-                                $sEventImageUrls = collect($sEvent->images ?? collect())
-                                    ->pluck('path')
-                                    ->filter()
-                                    ->map($toPublicUrl)
-                                    ->values();
-                                if ($sEventImageUrls->isEmpty() && $sEvent->image) {
-                                    $sEventImageUrls = collect([$toPublicUrl($sEvent->image)])->filter()->values();
-                                }
-                                $sEventFirstImageUrl = $sEventImageUrls->first();
-                                $sCategories = $sEvent->categories ?? collect();
-                                $sFirstCategory = $sCategories->first();
-                                $sFirstCategoryName = trim((string) ($sFirstCategory->name ?? ''));
-                                $sEventDate = $sEvent->event_date
-                                    ? $sEvent->event_date->translatedFormat(__('shop::app.events.card.date-format'))
-                                    : '';
-                            @endphp
-
-                            <a
-                                href="{{ route('shop.events.show', $sEvent->id) }}"
-                                class="shop-suggested-card"
-                            >
-                                <div class="shop-suggested-image">
-                                    @if ($sEventFirstImageUrl)
-                                        <img src="{{ $sEventFirstImageUrl }}" alt="{{ $sEvent->title }}">
-                                    @else
-                                        <div class="w-full h-full bg-gradient-to-br from-[color:var(--shop-surface-strong)] via-[color:var(--shop-surface)] to-[color:var(--shop-surface-strong)] flex items-center justify-center text-[color:var(--shop-placeholder)]">
-                                            <span class="text-xs font-semibold">{{ __('shop::app.events.card.no-image') }}</span>
-                                        </div>
-                                    @endif
-
-                                    @if ($sFirstCategoryName !== '')
-                                        <div class="shop-suggested-category">
-                                            <i class="fas fa-tag" aria-hidden="true"></i>
-                                            <span>{{ $sFirstCategoryName }}</span>
-                                        </div>
-                                    @endif
-                                </div>
-
-                                <div class="shop-suggested-content">
-                                    <div class="shop-suggested-title">{{ $sEvent->title }}</div>
-
-                                    @if ($sEventDate !== '')
-                                        <div class="shop-suggested-date">
-                                            <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                                            <span>{{ $sEventDate }}</span>
-                                        </div>
-                                    @endif
-
-                                    <div class="shop-suggested-price">
-                                        @include('shop::events.partials.seats-label', ['event' => $sEvent])
-                                    </div>
-
-                                    <div class="shop-suggested-actions">
-                                        <span class="sr-only">{{ __('shop::app.events.card.details') }}</span>
-                                        <span class="shop-suggested-cta">
-                                            {{ __('shop::app.events.card.details') }}
-                                            <i class="fas fa-arrow-left" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </a>
+                            <li class="min-w-0">
+                                @include('shop::events.partials.event-card', [
+                                    'event' => $sEvent,
+                                    'variant' => 'grid',
+                                    'showExcerpt' => true,
+                                    'subscribedEventIds' => [],
+                                ])
+                            </li>
                         @endforeach
-                    </div>
+                    </ul>
                 </section>
             @endif
         </div>

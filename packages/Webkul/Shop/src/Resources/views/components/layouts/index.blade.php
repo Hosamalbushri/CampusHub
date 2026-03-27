@@ -82,11 +82,23 @@
             $shopAccent = core()->getConfigData('general.store.shop.accent_color')
                 ?: core()->getConfigData('general.design.shop.accent_color')
                 ?: '#0369a1';
+            $shopIconColor = core()->getConfigData('general.store.shop.icon_color')
+                ?: core()->getConfigData('general.design.shop.icon_color')
+                ?: $shopAccent;
+            $shopBadgeColor = core()->getConfigData('general.store.shop.badge_color')
+                ?: core()->getConfigData('general.design.shop.badge_color')
+                ?: $shopPrimary;
             if (! preg_match('/^#[0-9A-Fa-f]{6}$/', $shopPrimary)) {
                 $shopPrimary = '#0284c7';
             }
             if (! preg_match('/^#[0-9A-Fa-f]{6}$/', $shopAccent)) {
                 $shopAccent = '#0369a1';
+            }
+            if (! preg_match('/^#[0-9A-Fa-f]{6}$/', $shopIconColor)) {
+                $shopIconColor = $shopAccent;
+            }
+            if (! preg_match('/^#[0-9A-Fa-f]{6}$/', $shopBadgeColor)) {
+                $shopBadgeColor = $shopPrimary;
             }
         @endphp
         <style id="shop-theme-colors">
@@ -94,6 +106,8 @@
                 --shop-font-sans: 'Cairo', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
                 --shop-primary: {{ $shopPrimary }};
                 --shop-accent: {{ $shopAccent }};
+                --shop-icon-color: {{ $shopIconColor }};
+                --shop-badge-color: {{ $shopBadgeColor }};
                 --shop-primary-hover: color-mix(in srgb, var(--shop-primary) 88%, black);
                 --shop-accent-hover: color-mix(in srgb, var(--shop-accent) 82%, black);
                 --shop-ring: color-mix(in srgb, var(--shop-primary) 55%, transparent);

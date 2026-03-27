@@ -69,7 +69,7 @@
                 </div>
             @endif
 
-            <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-violet-600/25 to-indigo-500/25 opacity-0 transition duration-300 group-hover:opacity-100" aria-hidden="true"></div>
+            <div class="pointer-events-none absolute inset-0 bg-[color:var(--shop-badge-color)]/20 opacity-0 transition duration-300 group-hover:opacity-100" aria-hidden="true"></div>
 
             @if ($isEnded)
                 <span class="pointer-events-none absolute start-3 top-3 inline-flex items-center rounded-full bg-red-600 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white shadow-sm">
@@ -82,8 +82,7 @@
                     @foreach ($categories as $cat)
                         @php $catName = trim((string) ($cat->name ?? '')); @endphp
                         @if ($catName !== '')
-                            <span class="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-violet-600 to-indigo-500 px-2.5 py-1 text-[11px] font-bold text-white shadow-sm">
-                                <i class="fas fa-tag text-[10px]" aria-hidden="true"></i>
+                            <span class="inline-flex items-center rounded-full bg-[color:var(--shop-badge-color)] px-2.5 py-1 text-[11px] font-bold text-white shadow-sm">
                                 {{ $catName }}
                             </span>
                         @endif
@@ -97,7 +96,7 @@
                         datetime="{{ $event->event_date->format('Y-m-d') }}"
                         class="inline-flex items-center gap-1.5 rounded-xl bg-black/70 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm"
                     >
-                        <i class="fas fa-calendar-alt text-[11px] text-violet-300" aria-hidden="true"></i>
+                        <i class="fas fa-calendar-alt text-[11px] text-white" aria-hidden="true"></i>
                         {{ $event->event_date->translatedFormat(__('shop::app.events.card.date-format')) }}
                     </time>
                 </div>
@@ -119,21 +118,21 @@
         <div class="space-y-2 text-sm text-slate-500">
             @if ($eventTime !== '')
                 <div class="flex items-center gap-2">
-                    <i class="fas fa-clock w-4 text-violet-500" aria-hidden="true"></i>
+                    <i class="fas fa-clock w-4 text-[color:var(--shop-icon-color)]" aria-hidden="true"></i>
                     <span>{{ $eventTime }}</span>
                 </div>
             @endif
 
             @if ($eventLocation !== '')
                 <div class="flex items-center gap-2">
-                    <i class="fas fa-map-marker-alt w-4 text-violet-500" aria-hidden="true"></i>
+                    <i class="fas fa-map-marker-alt w-4 text-[color:var(--shop-icon-color)]" aria-hidden="true"></i>
                     <span class="line-clamp-1">{{ $eventLocation }}</span>
                 </div>
             @endif
 
             @if ($eventOrganizer !== '')
                 <div class="flex items-center gap-2">
-                    <i class="fas fa-user-tie w-4 text-violet-500" aria-hidden="true"></i>
+                    <i class="fas fa-user-tie w-4 text-[color:var(--shop-icon-color)]" aria-hidden="true"></i>
                     <span class="line-clamp-1">{{ $eventOrganizer }}</span>
                 </div>
             @endif
@@ -152,7 +151,7 @@
             </div>
             <div class="h-1.5 overflow-hidden rounded-full bg-[#e7ebf3]">
                 <div
-                    class="h-full rounded-full bg-gradient-to-r from-violet-500 to-indigo-500 transition-all duration-500"
+                    class="h-full rounded-full bg-[color:var(--shop-badge-color)] transition-all duration-500"
                     style="width: {{ $progressPct ?? 0 }}%;"
                 ></div>
             </div>
@@ -164,7 +163,7 @@
         <div class="mt-auto flex flex-col gap-2.5 border-t border-[#eef1f6] pt-4 sm:flex-row sm:items-stretch">
             <a
                 href="{{ $detailUrl }}"
-                class="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-full border border-[#e5e9f2] bg-white px-4 py-2.5 text-center text-sm font-semibold text-slate-700 shadow-sm transition hover:border-violet-200 hover:bg-violet-50 hover:text-violet-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--shop-ring)]"
+                class="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-full border border-[color:var(--shop-primary)] bg-white px-4 py-2.5 text-center text-sm font-semibold text-[color:var(--shop-primary)] shadow-sm transition hover:bg-[color:var(--shop-primary)] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--shop-ring)]"
             >
                 {{ __('shop::app.events.card.details') }}
             </a>
@@ -191,7 +190,7 @@
             @else
                 <button
                     type="button"
-                    class="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-indigo-500 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--shop-ring)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[color:var(--shop-border-soft)] disabled:text-[color:var(--shop-text-muted)] disabled:shadow-none"
+                    class="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-full bg-[color:var(--shop-primary)] px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-[color:var(--shop-accent)] hover:brightness-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--shop-ring)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-[color:var(--shop-border-soft)] disabled:text-[color:var(--shop-text-muted)] disabled:shadow-none"
                     data-shop-event-subscribe
                     data-student-auth="{{ auth('student')->check() ? '1' : '0' }}"
                     data-student-login-url="{{ e($studentLoginUrl) }}"

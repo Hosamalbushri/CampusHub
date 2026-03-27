@@ -2403,6 +2403,8 @@ return [
                         'title-info' => 'Logo, favicon, and theme colors for the public shop and customer-facing pages.',
                         'primary-color' => 'Primary color',
                         'accent-color' => 'Accent color (links & emphasis)',
+                        'icon-color' => 'Icon color',
+                        'badge-color' => 'Badge color',
                         'header-middle-logo' => 'Header middle logo (between search and account)',
                     ],
                     'events-page' => [
@@ -2425,6 +2427,8 @@ return [
                         'title-info' => 'Logo, favicon, and theme colors for the public shop and customer-facing pages.',
                         'primary-color' => 'Primary color',
                         'accent-color' => 'Accent color (links & emphasis)',
+                        'icon-color' => 'Icon color',
+                        'badge-color' => 'Badge color',
                     ],
                     'events-page' => [
                         'title' => 'Events Page',

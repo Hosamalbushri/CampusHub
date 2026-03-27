@@ -90,6 +90,16 @@ return [
                 'type' => 'color',
                 'default' => '#0369a1',
             ], [
+                'name' => 'icon_color',
+                'title' => 'admin::app.configuration.index.general.store.shop-logo.icon-color',
+                'type' => 'color',
+                'default' => '#0369a1',
+            ], [
+                'name' => 'badge_color',
+                'title' => 'admin::app.configuration.index.general.store.shop-logo.badge-color',
+                'type' => 'color',
+                'default' => '#0284c7',
+            ], [
                 'name' => 'header_middle_logo',
                 'title' => 'admin::app.configuration.index.general.store.shop-logo.header-middle-logo',
                 'type' => 'image',
