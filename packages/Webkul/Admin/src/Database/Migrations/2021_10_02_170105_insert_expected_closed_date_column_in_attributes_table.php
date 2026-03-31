@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -13,6 +14,10 @@ return new class extends Migration
      */
     public function up()
     {
+        if (! Schema::hasTable('attributes')) {
+            return;
+        }
+
         DB::table('attributes')->insert([
             [
                 'id' => '7',
