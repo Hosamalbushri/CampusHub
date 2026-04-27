@@ -86,17 +86,6 @@
     ], JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP);
 @endphp
 
-@if ($fx['font_awesome'] ?? false)
-    @pushOnce('styles', 'shop-immersive-hero-fontawesome')
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        >
-    @endPushOnce
-@endif
-
 <section
     class="ih-root relative w-full overflow-x-hidden border-b border-slate-100 py-10"
     id="{{ $uid }}"

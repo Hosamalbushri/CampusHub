@@ -68,12 +68,6 @@
     }
 @endphp
 
-@if ($fx['font_awesome'] ?? false)
-    @pushOnce('styles', 'shop-portal-footer-fontawesome')
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
-    @endPushOnce
-@endif
-
 {{-- footer: overflow visible so fixed back-to-top is not clipped --}}
 <footer
     class="pf-root relative mt-9 w-full"
