@@ -58,16 +58,6 @@
 
         @stack('meta')
 
-        <link
-            rel="preconnect"
-            href="https://fonts.googleapis.com"
-        >
-        <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossorigin
-        >
-
         {{
             vite()->set(
                 ['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'],
@@ -103,7 +93,7 @@
         @endphp
         <style id="shop-theme-colors">
             :root {
-                --shop-font-sans: 'Cairo', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+                --shop-font-sans: 'Cairo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
                 --shop-primary: {{ $shopPrimary }};
                 --shop-accent: {{ $shopAccent }};
                 --shop-icon-color: {{ $shopIconColor }};
@@ -123,12 +113,6 @@
         </style>
 
         @pushOnce('styles', 'shop-cairo-font')
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link
-                href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap"
-                rel="stylesheet"
-            >
             <style>
                 :root { font-family: var(--shop-font-sans); }
                 body { font-family: var(--shop-font-sans); }

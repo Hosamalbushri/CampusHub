@@ -31,7 +31,7 @@ module.exports = {
             },
 
             fontFamily: {
-                inter: ['Inter'],
+                inter: ['Cairo', 'sans-serif'],
                 icon: ['icomoon']
             }
         },

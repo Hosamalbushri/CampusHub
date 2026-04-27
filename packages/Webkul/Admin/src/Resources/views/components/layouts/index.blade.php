@@ -47,13 +47,6 @@
         vite()->set(['src/Resources/assets/css/app.css', 'src/Resources/assets/js/app.js'])
     }}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet"
-    />
-
     <link
         rel="preload"
         as="image"
@@ -89,7 +82,7 @@
 
         :root,
         body {
-            font-family: 'Cairo', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+            font-family: 'Cairo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
         }
 
         {!! core()->getConfigData('general.content.custom_scripts.custom_css') !!}
@@ -98,7 +91,7 @@
     {!! view_render_event('admin.layout.head.after') !!}
 </head>
 
-<body class="h-full font-inter dark:bg-gray-950">
+<body class="h-full dark:bg-gray-950">
     {!! view_render_event('admin.layout.body.before') !!}
 
     <div
